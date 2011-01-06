@@ -1,4 +1,4 @@
-# �ȗ��R�}���h
+# 省略コマンド
 alias -g L="| less"
 alias -g G="| grep"
 alias ls="ls --color"
@@ -7,7 +7,7 @@ alias ll="ls -alFh"
 alias h="history"
 alias s="screen -D -RR"
 
-# git�������ϐ�
+# git向け環境変数
 export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
 export PATH=$PATH:~/bin:~/local/bin
@@ -16,7 +16,7 @@ export PATH=$PATH:~/bin:~/local/bin
 export PATH=$HOME/local/bin:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export EDITOR=vi
 
-# �F�t�������v�g
+# 色付きロンプト
 autoload colors
 colors
 case "$TERM" in
@@ -38,68 +38,68 @@ case "${TERM}" in screen)
 esac
 
 
-HISTFILE=$HOME/.zsh-history           # �������t�@�C���ɕۑ�����
-HISTSIZE=10000                        # ���������̗����̐�
-SAVEHIST=10000                        # �ۑ�����闚���̐�
-setopt extended_history               # �����t�@�C���Ɏ������L�^
-setopt share_history                  # �����̋��L
+HISTFILE=$HOME/.zsh-history           # 履歴をファイルに保存する
+HISTSIZE=10000                        # メモリ内の履歴の数
+SAVEHIST=10000                        # 保存される履歴の数
+setopt extended_history               # 履歴ファイルに時刻を記録
+setopt share_history                  # 履歴の共有
 
-bindkey -e                      # emacs���C�N�ȃL�[
-autoload -U compinit; compinit  # ���͕⏕
-setopt nolistbeep               # �⊮���Ƀr�[�v����炳�Ȃ�
-setopt append_history           # ������ zsh �𓯎��Ɏg�����Ȃ� history �t�@�C���ɏ㏑�������ǉ�����
-setopt auto_cd                  # �w�肵���R�}���h�����Ȃ��A�f�B���N�g�����ƈ�v�����ꍇ cd ����
-setopt auto_list                # �⊮��₪�������鎞�ɁA�ꗗ�\������
-setopt auto_menu                # �⊮�L�[�iTab, Ctrl+I) ��A�ł��邾���ŏ��ɕ⊮���������ŕ⊮����
-setopt auto_param_keys          # �J�b�R�̑Ή��Ȃǂ������I�ɕ⊮����
-setopt auto_param_slash         # �f�B���N�g�����̕⊮�Ŗ����� / �������I�ɕt�����A���̕⊮�ɔ�����
-setopt auto_resume              # �T�X�y���h���̃v���Z�X�Ɠ����R�}���h�������s�����ꍇ�̓��W���[������
-setopt NO_beep                  # �r�[�v����炳�Ȃ��悤�ɂ���
-setopt brace_ccl                # {a-c} �� a b c �ɓW�J����@�\���g����悤�ɂ���
-setopt correct                  # �R�}���h�̃X�y���`�F�b�N������
-setopt equals                   # =command �� command �̃p�X���ɓW�J����
-setopt extended_glob            # �t�@�C������ #, ~, ^ �� 3 �����𐳋K�\���Ƃ��Ĉ���
-setopt NO_flow_control          # Ctrl+S/Ctrl+Q �ɂ��t���[������g��Ȃ��悤�ɂ���
-setopt hist_ignore_dups         # ���O�Ɠ����R�}���h���C���̓q�X�g���ɒǉ����Ȃ�
-setopt hist_ignore_space        # �R�}���h���C���̐擪���X�y�[�X�Ŏn�܂�ꍇ�q�X�g���ɒǉ����Ȃ�
-setopt hist_verify              # �q�X�g�����Ăяo���Ă�����s����ԂɈ�U�ҏW�ł����ԂɂȂ�
-setopt NO_hup                   # �V�F�����I�����Ă����W���u�� HUP �V�O�i���𑗂�Ȃ��悤�ɂ���
-setopt ignore_eof               # Ctrl+D �ł͏I�����Ȃ��悤�ɂȂ�iexit, logout �Ȃǂ��g���j
-setopt interactive_comments     # �R�}���h���C���ł� # �ȍ~���R�����g�ƌ��Ȃ�
-setopt list_types               # auto_list �̕⊮���ꗗ�ŁAls -F �̂悤�Ƀt�@�C���̎�ʂ��}�[�N�\��
-setopt long_list_jobs           # �����R�}���h jobs �̏o�͂��f�t�H���g�� jobs -l �ɂ���
-setopt magic_equal_subst        # �R�}���h���C���̈����� --prefix=/usr �Ȃǂ� = �ȍ~�ł��⊮�ł���
-setopt mark_dirs                # �t�@�C�����̓W�J�Ńf�B���N�g���Ƀ}�b�`�����ꍇ������ / ��t������
-setopt multios                  # �����̃��_�C���N�g��p�C�v�ȂǁA�K�v�ɉ����� tee �� cat �̋@�\���g����
-setopt numeric_glob_sort        # �t�@�C�����̓W�J�ŁA�������ł͂Ȃ����l�I�Ƀ\�[�g�����悤�ɂȂ�
-setopt print_eightbit           # 8 �r�b�g�ڂ�ʂ��悤�ɂȂ�A���{��̃t�@�C�����Ȃǂ������悤�ɂȂ�
-setopt short_loops              # for, repeat, select, if, function �ȂǂŊȗ����@���g����悤�ɂȂ�
-setopt prompt_subst             # �F���g��
-setopt share_history            # �V�F���̃v���Z�X���Ƃɗ��������L
-setopt hist_no_store            # history (fc -l) �R�}���h���q�X�g�����X�g�����菜���B
-unsetopt promptcr               # �����񖖔��ɉ��s�R�[�h�������ꍇ�ł��\������
-setopt transient_rprompt        #�R�s�y�̎�rprompt���\������
-setopt autopushd                # cd -[tab] ��pushd
+bindkey -e                      # emacsライクなキー
+autoload -U compinit; compinit  # 入力補助
+setopt nolistbeep               # 補完時にビープ音を鳴らさない
+setopt append_history           # 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
+setopt auto_cd                  # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
+setopt auto_list                # 補完候補が複数ある時に、一覧表示する
+setopt auto_menu                # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完する
+setopt auto_param_keys          # カッコの対応などを自動的に補完する
+setopt auto_param_slash         # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt auto_resume              # サスペンド中のプロセスと同じコマンド名を実行した場合はリジュームする
+setopt NO_beep                  # ビープ音を鳴らさないようにする
+setopt brace_ccl                # {a-c} を a b c に展開する機能を使えるようにする
+setopt correct                  # コマンドのスペルチェックをする
+setopt equals                   # =command を command のパス名に展開する
+setopt extended_glob            # ファイル名で #, ~, ^ の 3 文字を正規表現として扱う
+setopt NO_flow_control          # Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
+setopt hist_ignore_dups         # 直前と同じコマンドラインはヒストリに追加しない
+setopt hist_ignore_space        # コマンドラインの先頭がスペースで始まる場合ヒストリに追加しない
+setopt hist_verify              # ヒストリを呼び出してから実行する間に一旦編集できる状態になる
+setopt NO_hup                   # シェルが終了しても裏ジョブに HUP シグナルを送らないようにする
+setopt ignore_eof               # Ctrl+D では終了しないようになる（exit, logout などを使う）
+setopt interactive_comments     # コマンドラインでも # 以降をコメントと見なす
+setopt list_types               # auto_list の補完候補一覧で、ls -F のようにファイルの種別をマーク表示
+setopt long_list_jobs           # 内部コマンド jobs の出力をデフォルトで jobs -l にする
+setopt magic_equal_subst        # コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
+setopt mark_dirs                # ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
+setopt multios                  # 複数のリダイレクトやパイプなど、必要に応じて tee や cat の機能が使われる
+setopt numeric_glob_sort        # ファイル名の展開で、辞書順ではなく数値的にソートされるようになる
+setopt print_eightbit           # 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
+setopt short_loops              # for, repeat, select, if, function などで簡略文法が使えるようになる
+setopt prompt_subst             # 色を使う
+setopt share_history            # シェルのプロセスごとに履歴を共有
+setopt hist_no_store            # history (fc -l) コマンドをヒストリリストから取り除く。
+unsetopt promptcr               # 文字列末尾に改行コードが無い場合でも表示する
+setopt transient_rprompt        #コピペの時rpromptを非表示する
+setopt autopushd                # cd -[tab] でpushd
 
-#setopt auto_remove_slash       # �Ōオ�f�B���N�g�����ŏI����Ă���ꍇ������ / �������I�Ɏ�菜��
-#setopt bsd_echo                # �����R�}���h�� echo �� BSD �݊��ɂ���
-#setopt chase_links             # �V���{���b�N�����N�͎��̂�ǂ��悤�ɂȂ�
-#setopt clobber                 # �����̃t�@�C�����㏑�����Ȃ��悤�ɂ���
-#setopt correct_all             # �R�}���h���C���S�ẴX�y���`�F�b�N������
-#setopt extended_history        # zsh �̊J�n�E�I���������q�X�g���t�@�C���ɏ�������
-#setopt hash_cmds               # �e�R�}���h�����s�����Ƃ��Ƀp�X���n�b�V���ɓ����
-#setopt single_line_zle         # �f�t�H���g�̕����s�R�}���h���C���ҏW�ł͂Ȃ��A�P�s�ҏW���[�h�ɂȂ�
-#setopt xtrace                  # �R�}���h���C�����ǂ̂悤�ɓW�J������s���ꂽ����\������悤�ɂȂ�
-#setopt mail_warning            # ���[���X�v�[�� $MAIL ���ǂ܂�Ă����烏�[�j���O��\������
-#setopt menu_complete           # �⊮��₪�������鎞�A�ꗗ�\�� (auto_list) �����A�����ɍŏ��̌���⊮����
-#setopt path_dirs               # �R�}���h���� / ���܂܂�Ă���Ƃ� PATH ���̃T�u�f�B���N�g����T��
-#setopt print_exit_value        # �߂�l�� 0 �ȊO�̏ꍇ�I���R�[�h��\������
-#setopt pushd_ignore_dups       # �f�B���N�g���X�^�b�N�ɓ����f�B���N�g����ǉ����Ȃ��悤�ɂȂ�
-#setopt pushd_to_home           # pushd �������Ȃ��Ŏ��s�����ꍇ pushd $HOME �ƌ��Ȃ����
-#setopt rm_star_silent          # rm * �Ȃǂ̍ہA�{���ɑS�Ẵt�@�C���������ėǂ����̊m�F���Ȃ��悤�ɂȂ�
-#setopt rm_star_wait            # rm_star_silent �̋t�ŁA10 �b�Ԕ������Ȃ��Ȃ�A�����܂����Ԃ��^������
+#setopt auto_remove_slash       # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除く
+#setopt bsd_echo                # 内部コマンドの echo を BSD 互換にする
+#setopt chase_links             # シンボリックリンクは実体を追うようになる
+#setopt clobber                 # 既存のファイルを上書きしないようにする
+#setopt correct_all             # コマンドライン全てのスペルチェックをする
+#setopt extended_history        # zsh の開始・終了時刻をヒストリファイルに書き込む
+#setopt hash_cmds               # 各コマンドが実行されるときにパスをハッシュに入れる
+#setopt single_line_zle         # デフォルトの複数行コマンドライン編集ではなく、１行編集モードになる
+#setopt xtrace                  # コマンドラインがどのように展開され実行されたかを表示するようになる
+#setopt mail_warning            # メールスプール $MAIL が読まれていたらワーニングを表示する
+#setopt menu_complete           # 補完候補が複数ある時、一覧表示 (auto_list) せず、すぐに最初の候補を補完する
+#setopt path_dirs               # コマンド名に / が含まれているとき PATH 中のサブディレクトリを探す
+#setopt print_exit_value        # 戻り値が 0 以外の場合終了コードを表示する
+#setopt pushd_ignore_dups       # ディレクトリスタックに同じディレクトリを追加しないようになる
+#setopt pushd_to_home           # pushd を引数なしで実行した場合 pushd $HOME と見なされる
+#setopt rm_star_silent          # rm * などの際、本当に全てのファイルを消して良いかの確認しないようになる
+#setopt rm_star_wait            # rm_star_silent の逆で、10 秒間反応しなくなり、頭を冷ます時間が与えられる
 
-# �⊮�����J���[�����O
+# 補完候補をカラーリング
 #eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
