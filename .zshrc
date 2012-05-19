@@ -1,22 +1,27 @@
-# 省略コマンド
+# ---( alias )-------------------------------------------------
 alias -g L="| less"
 alias -g G="| grep"
-alias ls="ls --color"
-alias l="ls -ltr"
-alias ll="ls -alFh"
+alias l="ls -Gltrh"
+alias ll="ls -GalhF"
 alias h="history"
-alias s="screen -D -RR"
+alias grep="grep --color=auto"
 
-# git向け環境変数
+
+# ---( export )-------------------------------------------------
+#git
 export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
 export PATH=$PATH:~/bin:~/local/bin
 
-# misc
+# shell path
 export PATH=$HOME/local/bin:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export EDITOR=vi
 
-# 色付きロンプト
+# python
+export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
+
+
+# ---( console )-------------------------------------------------
 autoload colors
 colors
 case "$TERM" in
@@ -31,19 +36,14 @@ xterm*|kterm*|rxvt*|screen)
     PROMPT='%m:%c%# '
     ;;
 esac
-case "${TERM}" in screen)
-    preexec() {
-        echo -ne "\ek${1%% *}\e\\"
-    }
-esac
 
 
-HISTFILE=$HOME/.zsh-history           # 履歴をファイルに保存する
-HISTSIZE=10000                        # メモリ内の履歴の数
-SAVEHIST=10000                        # 保存される履歴の数
-setopt extended_history               # 履歴ファイルに時刻を記録
-setopt share_history                  # 履歴の共有
-
+# ---( zsh )-------------------------------------------------
+HISTFILE=$HOME/.zsh-history     # 履歴をファイルに保存する
+HISTSIZE=10000                  # メモリ内の履歴の数
+SAVEHIST=10000                  # 保存される履歴の数
+setopt extended_history         # 履歴ファイルに時刻を記録
+setopt share_history            # 履歴の共有
 bindkey -e                      # emacsライクなキー
 autoload -U compinit; compinit  # 入力補助
 setopt nolistbeep               # 補完時にビープ音を鳴らさない
@@ -75,12 +75,11 @@ setopt numeric_glob_sort        # ファイル名の展開で、辞書順では�
 setopt print_eightbit           # 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
 setopt short_loops              # for, repeat, select, if, function などで簡略文法が使えるようになる
 setopt prompt_subst             # 色を使う
-setopt share_history            # シェルのプロセスごとに履歴を共有
+#setopt share_history            # シェルのプロセスごとに履歴を共有
 setopt hist_no_store            # history (fc -l) コマンドをヒストリリストから取り除く。
 unsetopt promptcr               # 文字列末尾に改行コードが無い場合でも表示する
 setopt transient_rprompt        #コピペの時rpromptを非表示する
 setopt autopushd                # cd -[tab] でpushd
-
 #setopt auto_remove_slash       # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除く
 #setopt bsd_echo                # 内部コマンドの echo を BSD 互換にする
 #setopt chase_links             # シンボリックリンクは実体を追うようになる
@@ -98,10 +97,13 @@ setopt autopushd                # cd -[tab] でpushd
 #setopt pushd_to_home           # pushd を引数なしで実行した場合 pushd $HOME と見なされる
 #setopt rm_star_silent          # rm * などの際、本当に全てのファイルを消して良いかの確認しないようになる
 #setopt rm_star_wait            # rm_star_silent の逆で、10 秒間反応しなくなり、頭を冷ます時間が与えられる
-
 # 補完候補をカラーリング
 #eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
+autoload -Uz compinit; compinit # 補完の利用設定
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=1
+
+# --( 環境依存 )-----------------------------------------------
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
