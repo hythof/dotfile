@@ -11,10 +11,9 @@ alias grep="grep --color=auto"
 #git
 export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
-export PATH=$PATH:~/bin:~/local/bin
 
 # shell path
-export PATH=$HOME/local/bin:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=$HOME/local/bin:$HOME/bin:$HOME/.vim/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export EDITOR=vi
 
 # python

@@ -75,11 +75,8 @@ set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 " 改行コードの優先順位
 set fileformats=unix,dos,mac
 
-" vimproc
-let g:vimproc_dll_path = $HOME."/.vim/autoload/proc.so"
-
 " コピペでさらにインデントしない
-set paste
+"set paste
 
 " .swpファイルの保存先
 set directory=~/tmp
@@ -87,7 +84,19 @@ set directory=~/tmp
 " ~ファイルの保存先
 set backupdir=~/tmp
 
-" --( ctags )-----------------------------------------
+" カーソル行を目立たせる
+:set cursorline
+":set cursorcolumn
+
+" ステータス行
+set laststatus=2
+set statusline=%<%F\ %m%r%h%w
+set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
+
+" vimpath
+let $PATH = $PATH . ':~/.vim/bin' 
+
+ " --( ctags )-----------------------------------------
 set tags=TAGS;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
 nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
 
@@ -117,13 +126,78 @@ autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>
 autocmd BufWritePost,FileWritePost *.gpg u 
 
 
-" ---( vim bundle )--------------------------------------
-" bundle
-call pathogen#infect()
-
-" python-mode
+" ---( vundle )--------------------------------------
+" git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+set nocompatible
 filetype off
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
 
+Bundle "klen/python-mode"
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 1
+let g:pymode_syntax_slow_sync = 1
+
+
+Bundle 'thinca/vim-ref'
+Bundle 'thinca/vim-quickrun'
+
+Bundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert = 1
+let g:unite_enable_split_vertically = 1 " open vsplit
+let g:unite_winwidth = 40 " open 40 width
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR> 
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
+
+Bundle "Shougo/neocomplcache"
+set completeopt=menuone
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-l> neocomplcache#complete_common_string()
+inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#close_popup()
+inoremap <expr><C-e> neocomplcache#cancel_popup()
+let g:neocomplcache_enable_auto_select = 1
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+Bundle "Shougo/neocomplcache-snippets-complete"
+let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
+
+filetype plugin indent on
