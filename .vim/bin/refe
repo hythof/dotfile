@@ -1,0 +1,4 @@
+#!/bin/sh
+chdir ~/.vim/doc/rubyrefm
+exec ruby -Ke -I bitclust/lib bitclust/bin/refe.rb -d db-1_8_7 "$@"
+
