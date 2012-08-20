@@ -5,4 +5,3 @@ all:
 
 clean:
 	cd ~ && rm ${DOT_FILES}
-
