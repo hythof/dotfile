@@ -152,6 +152,7 @@ Bundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert = 1
 "let g:unite_enable_split_vertically = 1 " open vsplit
 let g:unite_winwidth = 40 " open 40 width
+nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR> 
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
