@@ -2,6 +2,9 @@
 "新しい行のインデントを現在行と同じにする
 set autoindent
 
+"半角文字対応
+set ambiwidth=double
+
 "Vi互換をオフ
 set nocompatible
 
