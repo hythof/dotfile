@@ -153,11 +153,11 @@ let g:unite_enable_start_insert = 1
 "let g:unite_enable_split_vertically = 1 " open vsplit
 let g:unite_winwidth = 40 " open 40 width
 nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
+nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
