@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vimrc .zshrc .tmux.conf
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf
 
 all:
 	cd ~ && ln -sf $(foreach f, $(DOT_FILES), dotfile/$(f)) .
