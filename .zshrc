@@ -41,32 +41,17 @@ function rprompt-git-current-branch {
     fi
     echo "%{$color%}$name%{$reset_color%} "
 }
+function git-ls {
+    git log --oneline --stat $* \
+    | perl -ne 'if(/ +(\S+?)(\.\w+)? +\| +(\d+) (.+)/){ printf "%4s | %-50s %s\n", $3, $1 . $2, $4; }'
+}
 function git-wc {
-    author=`whoami`
-    day=7
-    include=""
-    exclude=""
-    while getopts a:d:i:e: opt $*
-        do
-            case $opt in
-            a) author=$OPTARG;;
-            d) day=$OPTARG;;
-            i) include=$OPTARG;;
-            e) exclude=$OPTARG;;
-            \?) echo "usage: ${0##*/} -a -d -i -e # author, day, include, exclude" >&2
-            exit 2
-            ;;
-        esac
-    done
-
-    command="git log --author=$author --stat --since=${day}.days"
-    if [[ $include != "" ]]; then
-        command="$command | grep $include"
-    fi
-    if [[ $exclude != "" ]]; then
-        command="$command | grep -v $exclude"
-    fi
-    eval $command | perl -ne 'if(/ +(\S+) +\| +(\d+) (.+)/){ $ENV["X"] += int($2); printf "%4s\t%-50s\t%s\n", $ENV["X"], $1, $3 }'
+    git-ls $* \
+    | perl -ne '
+    if($.==1){ %c = (); };
+    if(/(\d+) +\| +\S+?(\.\w+)? /){ $c{$2}+=int($1) };
+    if(eof){ foreach(sort { $c{$a} <=> $c{$b} } keys %c) { printf "%6s | %s\n", $c{$_}, ($_ ? $_ : "(none)") } };
+    '
 }
 # ---( console )-------------------------------------------------
 autoload colors
