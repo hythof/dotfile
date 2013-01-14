@@ -21,25 +21,52 @@ export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 
 # --( Git )-----------------------------------------------
 function rprompt-git-current-branch {
-        local name st color
-        if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
-                return
-        fi
-        name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
-        if [[ -z $name ]]; then
-                return
-        fi
-        st=`git status 2> /dev/null`
-        if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-                color=${fg[green]}
-        elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-                color=${fg[yellow]}
-        elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
-                color=${fg_bold[red]}
-        else
-                color=${fg[red]}
-        fi
-        echo "%{$color%}$name%{$reset_color%} "
+    local name st color
+    if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
+            return
+    fi
+    name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+    if [[ -z $name ]]; then
+            return
+    fi
+    st=`git status 2> /dev/null`
+    if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+            color=${fg[green]}
+    elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+            color=${fg[yellow]}
+    elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+            color=${fg_bold[red]}
+    else
+            color=${fg[red]}
+    fi
+    echo "%{$color%}$name%{$reset_color%} "
+}
+function git-wc {
+    author=`whoami`
+    day=7
+    include=""
+    exclude=""
+    while getopts a:d:i:e: opt $*
+        do
+            case $opt in
+            a) author=$OPTARG;;
+            d) day=$OPTARG;;
+            i) include=$OPTARG;;
+            e) exclude=$OPTARG;;
+            \?) echo "usage: ${0##*/} -a -d -i -e # author, day, include, exclude" >&2
+            exit 2
+            ;;
+        esac
+    done
+
+    command="git log --author=$author --stat --since=${day}.days"
+    if [[ $include != "" ]]; then
+        command="$command | grep $include"
+    fi
+    if [[ $exclude != "" ]]; then
+        command="$command | grep -v $exclude"
+    fi
+    eval $command | perl -ne 'if(/ +(\S+) +\| +(\d+) (.+)/){ $ENV["X"] += int($2); printf "%4s\t%-50s\t%s\n", $ENV["X"], $1, $3 }'
 }
 # ---( console )-------------------------------------------------
 autoload colors
