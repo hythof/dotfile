@@ -6,7 +6,6 @@ alias ll="ls -GalhF"
 alias h="history"
 alias grep="grep --color=auto"
 
-
 # ---( export )-------------------------------------------------
 #git
 export GIT_AUTHOR_NAME=`whoami`
@@ -42,7 +41,7 @@ function rprompt-git-current-branch {
     echo "%{$color%}$name%{$reset_color%} "
 }
 function git-ls {
-    git log --oneline --stat $* \
+    git log --oneline --stat --since=1.days $* \
     | perl -ne 'if(/ +(\S+?)(\.\w+)? +\| +(\d+) (.+)/){ printf "%4s | %-50s %s\n", $3, $1 . $2, $4; }'
 }
 function git-wc {
@@ -64,13 +63,11 @@ xterm*|kterm*|rxvt*|screen)
     #RPROMPT="[%{${fg[green]}%}%~%{${reset_color}%}]"
     setopt prompt_subst
     RPROMPT='[`rprompt-git-current-branch`%{${fg[green]}%}%~%{${reset_color}%}]'
-
     ;;
 *)
     PROMPT='%m:%c%# '
     ;;
 esac
-
 
 # ---( zsh )-------------------------------------------------
 HISTFILE=$HOME/.zsh-history     # 履歴をファイルに保存する
@@ -78,7 +75,7 @@ HISTSIZE=10000                  # メモリ内の履歴の数
 SAVEHIST=10000                  # 保存される履歴の数
 setopt extended_history         # 履歴ファイルに時刻を記録
 setopt share_history            # 履歴の共有
-bindkey -e                      # emacsライクなキー
+bindkey -e                      # emacsライクなキーバインド
 autoload -U compinit; compinit  # 入力補助
 setopt nolistbeep               # 補完時にビープ音を鳴らさない
 setopt append_history           # 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
