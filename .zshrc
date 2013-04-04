@@ -15,6 +15,9 @@ export GIT_COMMITTER_NAME=`whoami`
 export PATH=$HOME/local/bin:$HOME/bin:$HOME/.vim/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export EDITOR=vi
 
+# for pager
+export LESSCHARSET=utf-8
+
 # python
 export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 
@@ -124,3 +127,9 @@ zstyle ':completion:*:default' menu select=1
 
 # --( 環境依存 )-----------------------------------------------
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+export PERL_LOCAL_LIB_ROOT="/home/tadokoro/perl5";
+export PERL_MB_OPT="--install_base /home/tadokoro/perl5";
+export PERL_MM_OPT="INSTALL_BASE=/home/tadokoro/perl5";
+export PERL5LIB="/home/tadokoro/perl5/lib/perl5/x86_64-linux-gnu-thread-multi:/home/tadokoro/perl5/lib/perl5";
+export PATH="/home/tadokoro/perl5/bin:$PATH";
