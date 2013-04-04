@@ -19,26 +19,13 @@ export EDITOR=vi
 export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 
 # --( Git )-----------------------------------------------
-function rprompt-git-current-branch {
-    local name st color
-    if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
-            return
-    fi
-    name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
-    if [[ -z $name ]]; then
-            return
-    fi
-    st=`git status 2> /dev/null`
-    if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-            color=${fg[green]}
-    elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-            color=${fg[yellow]}
-    elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
-            color=${fg_bold[red]}
-    else
-            color=${fg[red]}
-    fi
-    echo "%{$color%}$name%{$reset_color%} "
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '%b '
+zstyle ':vcs_info:*' actionformats '%b|%a '
+precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 function git-ls {
     git log --oneline --stat --since=1.days $* \
@@ -62,7 +49,7 @@ xterm*|kterm*|rxvt*|screen)
         PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
     #RPROMPT="[%{${fg[green]}%}%~%{${reset_color}%}]"
     setopt prompt_subst
-    RPROMPT='[`rprompt-git-current-branch`%{${fg[green]}%}%~%{${reset_color}%}]'
+    RPROMPT='[%1(v|%F{green}%1v%f|)%{${fg[green]}%}%~%{${reset_color}%}]'
     ;;
 *)
     PROMPT='%m:%c%# '
