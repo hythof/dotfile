@@ -42,6 +42,9 @@ function git-wc {
     if(eof){ foreach(sort { $c{$a} <=> $c{$b} } keys %c) { printf "%6s | %s\n", $c{$_}, ($_ ? $_ : "(none)") } };
     '
 }
+function git-branch {
+    git fetch; git branch -r | egrep -v "master|release" | xargs -i{} git --no-pager log -1 --date=iso --pretty=format:'%C(red)%ad%Creset {} \\t\\t\\t %C(green)%s%Creset\\n' --decorate {} | xargs echo -e | sort -r
+}
 # ---( console )-------------------------------------------------
 autoload colors
 colors
