@@ -3,7 +3,7 @@ alias -g L="| less"
 alias -g G="| grep"
 alias l="ls -Gltrh"
 alias ll="ls -GalhF"
-alias h="history"
+alias h="history -i"
 alias grep="grep --color=auto"
 
 # ---( export )-------------------------------------------------
