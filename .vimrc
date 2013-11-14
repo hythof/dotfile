@@ -1,3 +1,39 @@
+" --( basic keybind )-----------------------------------------
+nnoremap J :cn <CR>
+nnoremap K :cN <CR>
+nnoremap <space>l :call ExLs() <CR>
+nnoremap <space>r :e ~/.vimrc <CR> :<C-u>source $MYVIMRC <CR>
+nnoremap <space>g :call ExGrep() <CR>
+nnoremap <space>f :e website/templates/featurephone/
+nnoremap <space>s :e website/templates/smartphone/
+nnoremap <space>m :e module/
+nnoremap <space>e :e %:h/
+nnoremap <space>c :autocmd! BufWritePost * call system('xdotool key --window $(xdotool search --onlyvisible --class "google-chrome") F5') <CR>
+
+function! ExLs()
+    execute 'ls'
+    let n = input('Select: ')
+    if n != ''
+        execute 'b' . n
+    endif
+endfunction
+
+function! ExGrep()
+    if !exists("g:ex_grep_word")
+        let g:ex_grep_word = ""
+    endif
+    if !exists("g:ex_grep_path")
+        let g:ex_grep_path = "**/*.py"
+    endif
+    let g:ex_grep_word = input('Find: ', g:ex_grep_word)
+    let g:ex_grep_path = input('Path: ', g:ex_grep_path)
+    if g:ex_grep_word != ""
+        execute 'silent grep "' . g:ex_grep_word . '" ' . g:ex_grep_path
+        cwindo
+    endif
+endfunction
+
+
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
 set autoindent
@@ -103,7 +139,7 @@ set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 " vimpath
 let $PATH = $PATH . ':~/.vim/bin' 
 
- " --( ctags )-----------------------------------------
+" --( ctags )-----------------------------------------
 set tags=tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
 nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
 
@@ -141,28 +177,27 @@ set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
 Bundle "klen/python-mode"
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
+let g:pymode_doc_key = 'H'
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 1
 let g:pymode_syntax_slow_sync = 1
+"let g:pymode_run_key = '<leader>r'
 
+"Bundle 'thinca/vim-ref'
+"Bundle 'thinca/vim-quickrun'
 
-Bundle 'thinca/vim-ref'
-Bundle 'thinca/vim-quickrun'
-
-Bundle 'Shougo/unite.vim'
-let g:unite_enable_start_insert = 1
-"let g:unite_enable_split_vertically = 1 " open vsplit
-let g:unite_winwidth = 40 " open 40 width
-nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+"Bundle 'Shougo/unite.vim'
+"let g:unite_enable_start_insert = 1
+""let g:unite_enable_split_vertically = 1 " open vsplit
+"let g:unite_winwidth = 40 " open 40 width
+"nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
+"nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
+"nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
+"nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
+"nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+"au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+"au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 
 "Bundle "Shougo/neocomplcache"
@@ -209,3 +244,5 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
 filetype plugin indent on
+
+" insert mode key map
