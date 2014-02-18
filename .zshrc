@@ -7,6 +7,11 @@ alias -g G="| grep"
 alias l="ls -Gltrh"
 alias ll="ls -GalhF"
 alias h="history -i"
+alias gd="git diff --color-words"                                                     
+alias gdc="git diff --color-words --cached"                                                     
+alias gs="git status --short --branch"
+alias gl="git log --graph --decorate --oneline --stat"
+
 
 # ---( export )-------------------------------------------------
 #git

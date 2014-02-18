@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .gitignore_global
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .gitignore_global .gitattributes_global
 
 all:
 	make install
@@ -14,8 +14,8 @@ install:
 
 git:
 	git config --global color.ui true
-	git config --global --add core.excludesfile "$HOME/.gitignore_global"
-	git config alias.diff-ex "diff --color-words"
+	git config --global core.excludesfile ~/.gitignore_global
+	git config --global core.attributesfile ~/.gitattributes_global
 
 clean:
 	cd ~ && rm ${DOT_FILES}
