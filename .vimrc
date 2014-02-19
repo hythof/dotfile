@@ -1,38 +1,11 @@
 " --( basic keybind )-----------------------------------------
 nnoremap J :cn <CR>
 nnoremap K :cN <CR>
-nnoremap <space>l :call ExLs() <CR>
 nnoremap <space>r :e ~/.vimrc <CR> :<C-u>source $MYVIMRC <CR>
-nnoremap <space>g :call ExGrep() <CR>
 nnoremap <space>f :e website/templates/featurephone/
 nnoremap <space>s :e website/templates/smartphone/
 nnoremap <space>m :e module/
 nnoremap <space>e :e %:h/
-nnoremap <space>c :autocmd! BufWritePost * call system('xdotool key --window $(xdotool search --onlyvisible --class "google-chrome") F5') <CR>
-
-function! ExLs()
-    execute 'ls'
-    let n = input('Select: ')
-    if n != ''
-        execute 'b' . n
-    endif
-endfunction
-
-function! ExGrep()
-    if !exists("g:ex_grep_word")
-        let g:ex_grep_word = ""
-    endif
-    if !exists("g:ex_grep_path")
-        let g:ex_grep_path = "**/*.py"
-    endif
-    let g:ex_grep_word = input('Find: ', g:ex_grep_word)
-    let g:ex_grep_path = input('Path: ', g:ex_grep_path)
-    if g:ex_grep_word != ""
-        execute 'silent grep "' . g:ex_grep_word . '" ' . g:ex_grep_path
-        cwindo
-    endif
-endfunction
-
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -176,15 +149,51 @@ filetype off
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
+" --
 Bundle "klen/python-mode"
 let g:pymode_doc_key = 'H'
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 1
 let g:pymode_syntax_slow_sync = 1
-"let g:pymode_run_key = '<leader>r'
+let g:pymode_run_key = '<leader>r'
+
+" --
+Bundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+
+filetype plugin indent on
+
+" ---( botsu )--------------------------------------
+"nnoremap <space>c :autocmd! BufWritePost * call system('xdotool key --window $(xdotool search --onlyvisible --class "google-chrome") F5') <CR>
+"function! ExLs()
+"    execute 'ls'
+"    let n = input('Select: ')
+"    if n != ''
+"        execute 'b' . n
+"    endif
+"endfunction
+"
+"function! ExGrep()
+"    if !exists("g:ex_grep_word")
+"        let g:ex_grep_word = ""
+"    endif
+"    if !exists("g:ex_grep_path")
+"        let g:ex_grep_path = "**/*.py"
+"    endif
+"    let g:ex_grep_word = input('Find: ', g:ex_grep_word)
+"    let g:ex_grep_path = input('Path: ', g:ex_grep_path)
+"    if g:ex_grep_word != ""
+"        execute 'silent grep "' . g:ex_grep_word . '" ' . g:ex_grep_path
+"        cwindo
+"    endif
+"endfunction
+
+" -----------------------------------------------------------
 
 "Bundle 'thinca/vim-ref'
 "Bundle 'thinca/vim-quickrun'
+
+" -----------------------------------------------------------
 
 "Bundle 'Shougo/unite.vim'
 "let g:unite_enable_start_insert = 1
@@ -199,6 +208,7 @@ let g:pymode_syntax_slow_sync = 1
 "au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 "au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
+" -----------------------------------------------------------
 
 "Bundle "Shougo/neocomplcache"
 "set completeopt=menuone
@@ -242,7 +252,5 @@ let g:pymode_syntax_slow_sync = 1
 "
 "Bundle "Shougo/neocomplcache-snippets-complete"
 "let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
-
-filetype plugin indent on
-
-" insert mode key map
+"
+"insert mode key map
