@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc
 
 all:
 	git pull
