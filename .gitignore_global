@@ -1,0 +1,8 @@
+*~
+.DS_Store
+tags
+tags.meta
+*.o
+*.lo
+*.la
+#*#
