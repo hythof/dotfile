@@ -1,18 +1,6 @@
-" ---( customize )--------------------------------------
-nnoremap <space>t :call ExTagJump()
-function! ExTagJump()
-    let word = expand("<cword>")
-    if word == ""
-        return
-    endif
-
-    echom word
-endfunction
-
-" --( basic keybind )-----------------------------------------
+" --( customize )-----------------------------------------
 nnoremap J :cn <CR>
 nnoremap K :cN <CR>
-"nnoremap <space>r :e ~/.vimrc <CR> :<C-u>source $MYVIMRC <CR>
 nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
 
@@ -83,6 +71,9 @@ au GUIEnter * simalt ~x
 " ウィンドウを開く向きを指定
 set splitright
 "set splitbelow
+
+" プレビューウィンドウの高さ指定
+set previewheight=20
 
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
@@ -160,6 +151,7 @@ if $GOROOT != '' && $GOPATH != ''
     filetype off
     filetype plugin indent off
     set rtp+=$GOROOT/misc/vim
+    exe "set runtimepath+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
     filetype plugin indent on
     syntax on
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -187,17 +179,16 @@ let g:vim_markdown_folding_disabled=1
 
 " --
 Bundle 'Shougo/unite.vim'
-let g:unite_enable_start_insert = 1
-let g:unite_enable_split_vertically = 1 " open vsplit
-let g:unite_winwidth = 40 " open 40 width
-nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
-nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite -auto-preview -no-split 
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:bd<CR>
+
+" --
+Bundle 'tsukkee/unite-tag'
+
+" --
+Bundle 'Shougo/unite-outline'
+
 
 " --
 filetype plugin indent on  " required

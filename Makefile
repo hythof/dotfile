@@ -19,7 +19,6 @@ install:
 	git submodule update
 	cd ~ && ln -sf $(foreach f, $(DOT_FILES), dotfile/$(f)) .
 	mkdir -p ~/tmp
-	source ~/.zshrc
 
 git:
 	git config --global color.ui true
