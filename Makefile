@@ -2,10 +2,10 @@ DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global
 GO_ROOT = $(HOME)/go
 
 help:
-	echo "make install # install dot files"
-	echo "make git     # set git global config"
-	echo "make go      # install go programming language. depend mercurial. need make install(depend .zshrc)."
-	echo "make clean   # rm all"
+	@echo "make install # install dot files"
+	@echo "make git     # set git global config"
+	@echo "make go      # install go programming language. depend mercurial. need make install(depend .zshrc)."
+	@echo "make clean   # rm all"
 
 all:
 	make install
