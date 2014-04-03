@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .gitignore_global .gitattributes_global
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global
 GO_ROOT = $(HOME)/go
 
 help:
