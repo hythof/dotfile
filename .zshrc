@@ -14,7 +14,7 @@ alias gl="git log --graph --decorate --oneline --stat"
 
 
 # ---( export )-------------------------------------------------
-#git
+# git
 export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
 
@@ -27,6 +27,21 @@ export LESSCHARSET=utf-8
 
 # python
 export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
+
+# go
+# http://golang.org/doc/install/source
+export GOROOT=$HOME/go
+export GOPATH=$HOME/gocode
+export PATH=$PATH:$GOROOT/bin
+export GOARCH=amd64
+case ${OSTYPE} in
+darwin*)
+    export GOOS=darwin
+    ;;
+linux*)
+    export GOOS=linux
+    ;;
+esac
 
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info

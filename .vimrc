@@ -1,10 +1,19 @@
+" ---( customize )--------------------------------------
+nnoremap <space>t :call ExTagJump()
+function! ExTagJump()
+    let word = expand("<cword>")
+    if word == ""
+        return
+    endif
+
+    echom word
+endfunction
+
 " --( basic keybind )-----------------------------------------
 nnoremap J :cn <CR>
 nnoremap K :cN <CR>
-nnoremap <space>r :e ~/.vimrc <CR> :<C-u>source $MYVIMRC <CR>
-nnoremap <space>f :e website/templates/featurephone/
-nnoremap <space>s :e website/templates/smartphone/
-nnoremap <space>m :e module/
+"nnoremap <space>r :e ~/.vimrc <CR> :<C-u>source $MYVIMRC <CR>
+nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
 
 " ---( generic )--------------------------------------
@@ -71,6 +80,10 @@ set hlsearch
 "ウィンドウを最大化して起動
 au GUIEnter * simalt ~x
 
+" ウィンドウを開く向きを指定
+set splitright
+"set splitbelow
+
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
 autocmd!
@@ -91,9 +104,6 @@ set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 " 改行コードの優先順位
 set fileformats=unix,dos,mac
 
-" コピペでさらにインデントしない
-"set paste
-
 " .swpファイルの保存先
 set directory=~/tmp
 
@@ -107,7 +117,10 @@ set backupdir=~/tmp
 " ステータス行
 set laststatus=2
 set statusline=%<%F\ %m%r%h%w
-set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
+set statusline+=%=
+set statusline+=[%c:%l]
+set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']'}
+set statusline+=%{'['.&fileformat.']'}
 
 " vimpath
 let $PATH = $PATH . ':~/.vim/bin' 
@@ -142,10 +155,21 @@ autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>
 autocmd BufWritePost,FileWritePost *.gpg u 
 
 
+" ---( go lang )--------------------------------------
+if $GOROOT != '' && $GOPATH != ''
+    filetype off
+    filetype plugin indent off
+    set rtp+=$GOROOT/misc/vim
+    filetype plugin indent on
+    syntax on
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+endif
+
+
 " ---( vundle )--------------------------------------
 " git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
-set nocompatible
-filetype off
+set nocompatible " be iMproved, required
+filetype off     " required
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
@@ -161,96 +185,19 @@ let g:pymode_run_key = '<leader>r'
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-filetype plugin indent on
+" --
+Bundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert = 1
+let g:unite_enable_split_vertically = 1 " open vsplit
+let g:unite_winwidth = 40 " open 40 width
+nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
+nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
+nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
-" ---( botsu )--------------------------------------
-"nnoremap <space>c :autocmd! BufWritePost * call system('xdotool key --window $(xdotool search --onlyvisible --class "google-chrome") F5') <CR>
-"function! ExLs()
-"    execute 'ls'
-"    let n = input('Select: ')
-"    if n != ''
-"        execute 'b' . n
-"    endif
-"endfunction
-"
-"function! ExGrep()
-"    if !exists("g:ex_grep_word")
-"        let g:ex_grep_word = ""
-"    endif
-"    if !exists("g:ex_grep_path")
-"        let g:ex_grep_path = "**/*.py"
-"    endif
-"    let g:ex_grep_word = input('Find: ', g:ex_grep_word)
-"    let g:ex_grep_path = input('Path: ', g:ex_grep_path)
-"    if g:ex_grep_word != ""
-"        execute 'silent grep "' . g:ex_grep_word . '" ' . g:ex_grep_path
-"        cwindo
-"    endif
-"endfunction
-
-" -----------------------------------------------------------
-
-"Bundle 'thinca/vim-ref'
-"Bundle 'thinca/vim-quickrun'
-
-" -----------------------------------------------------------
-
-"Bundle 'Shougo/unite.vim'
-"let g:unite_enable_start_insert = 1
-""let g:unite_enable_split_vertically = 1 " open vsplit
-"let g:unite_winwidth = 40 " open 40 width
-"nnoremap <silent> ,, :<C-u>Unite buffer<CR> 
-"nnoremap <silent> ,b :<C-u>Unite buffer<CR> 
-"nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-"nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
-"nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
-"nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-"au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-"au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-
-" -----------------------------------------------------------
-
-"Bundle "Shougo/neocomplcache"
-"set completeopt=menuone
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-"let g:neocomplcache_dictionary_filetype_lists = {
-"    \ 'default' : '',
-"    \ 'vimshell' : $HOME.'/.vimshell_hist',
-"    \ 'scheme' : $HOME.'/.gosh_completions'
-"        \ }
-"if !exists('g:neocomplcache_keyword_patterns')
-"    let g:neocomplcache_keyword_patterns = {}
-"endif
-"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-"inoremap <expr><C-g> neocomplcache#undo_completion()
-"inoremap <expr><C-l> neocomplcache#complete_common_string()
-"inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
-"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
-"inoremap <expr><C-y> neocomplcache#close_popup()
-"inoremap <expr><C-e> neocomplcache#cancel_popup()
-"let g:neocomplcache_enable_auto_select = 1
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"if !exists('g:neocomplcache_omni_patterns')
-"  let g:neocomplcache_omni_patterns = {}
-"endif
-"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-"let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-"let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-"
-"Bundle "Shougo/neocomplcache-snippets-complete"
-"let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
-"
-"insert mode key map
+" --
+filetype plugin indent on  " required
