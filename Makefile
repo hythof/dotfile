@@ -2,10 +2,10 @@ DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global
 GO_ROOT = $(HOME)/go
 
 help:
-	make install # install dot files
-	make git     # set git global config
-	make go      # install go programming language. depend mercurial. need make install(depend .zshrc).
-	make clean   # rm all
+	@echo "make install # install dot files"
+	@echo "make git     # set git global config"
+	@echo "make go      # install go programming language. depend mercurial. need make install(depend .zshrc)."
+	@echo "make clean   # rm all"
 
 all:
 	make install
@@ -21,9 +21,9 @@ install:
 	mkdir -p ~/tmp
 
 git:
-	git config --global color.ui true
-	git config --global core.excludesfile ~/.gitignore_global
-	git config --global core.attributesfile ~/.gitattributes_global
+	git config --global --replace-all color.ui true
+	git config --global --replace-all core.excludesfile ~/.gitignore_global
+	git config --global --replace-all core.attributesfile ~/.gitattributes_global
 
 go:
 ifeq "$(wildcard $(GO_ROOT))" ""
@@ -32,7 +32,7 @@ else
 	cd ~/go && hg pull && hg update release
 endif
 	cd  ~/go/src && ./all.bash
-	$(GO_ROOT)/bin/go get code.google.com/p/go.tools/cmd/godoc
+	zsh -c "$(GO_ROOT)/bin/go get code.google.com/p/go.tools/cmd/godoc"
 
 clean:
 	cd ~ && rm ${DOT_FILES}
