@@ -11,6 +11,7 @@ help:
 	@echo "-- platform --"
 	@echo "make ubuntu-init"
 	@echo "make ubuntu-font"
+	@echo "make ubuntu-terminal-theme"
 
 all:
 	make install
@@ -62,3 +63,7 @@ ubuntu-font:
 	(cd ~/tmp/Ricty && sh ricty_generator.sh auto && cp *.ttf ~/.fonts)
 	cd ~/.fonts; rm Inconsolata.otf migu-1m*
 	gnome-tweak-tool &
+
+ubuntu-terminal-theme:
+	mkdir -p ~/tmp
+	(cd ~/tmp && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git && cd gnome-terminal-colors-solarized && ./install.sh)
