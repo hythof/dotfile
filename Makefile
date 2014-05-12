@@ -1,6 +1,7 @@
 DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global
 GO_ROOT = $(HOME)/go
 DOTFILE_DIR = $(shell pwd)
+GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
 help:
 	@echo "make all     # make install, git, go"
@@ -65,5 +66,10 @@ ubuntu-font:
 	gnome-tweak-tool &
 
 ubuntu-terminal-theme:
+ifeq "$(wildcard $(GNOME_TERMINAL_COLOR_DIR))" ""
 	mkdir -p ~/tmp
-	(cd ~/tmp && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git && cd gnome-terminal-colors-solarized && ./install.sh)
+	(cd ~/tmp && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git)
+else
+	(cd ~/tmp/gnome-terminal-colors-solarized && git pull)
+endif
+	(cd ~/tmp/gnome-terminal-colors-solarized && ./install.sh)
