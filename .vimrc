@@ -3,6 +3,7 @@ nnoremap J :cn <CR>
 nnoremap K :cN <CR>
 nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
+au BufRead,BufNewFile *.spa set filetype=spa
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -172,6 +173,9 @@ let g:pymode_folding = 0
 let g:pymode_virtualenv = 1
 let g:pymode_syntax_slow_sync = 1
 let g:pymode_run_key = '<leader>r'
+let g:pymode_rope = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_lookup_project = 0
 
 " --
 Bundle 'plasticboy/vim-markdown'
@@ -179,9 +183,15 @@ let g:vim_markdown_folding_disabled=1
 
 " --
 Bundle 'Shougo/unite.vim'
-nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite -auto-preview -no-split 
+nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite 
+nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
+nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR>
+nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:bd<CR>
+
+" --
+Bundle 'Shougo/vimproc.vim'
 
 " --
 Bundle 'tsukkee/unite-tag'
