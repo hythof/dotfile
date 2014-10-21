@@ -31,6 +31,7 @@ git:
 	git config --global --replace-all color.ui true
 	git config --global --replace-all core.excludesfile ~/.gitignore_global
 	git config --global --replace-all core.attributesfile ~/.gitattributes_global
+	git config --global pull.rebase true
 
 go:
 ifeq "$(wildcard $(GO_ROOT))" ""
