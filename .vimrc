@@ -4,6 +4,7 @@ nnoremap K :cN <CR>
 nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
 au BufRead,BufNewFile *.spa set filetype=spa
+au BufRead,BufNewFile *.vl set filetype=vl
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -151,8 +152,7 @@ autocmd BufWritePost,FileWritePost *.gpg u
 if $GOROOT != '' && $GOPATH != ''
     filetype off
     filetype plugin indent off
-    set rtp+=$GOROOT/misc/vim
-    exe "set runtimepath+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+    set rtp+=~/.vim/golang
     filetype plugin indent on
     syntax on
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
