@@ -1,0 +1,1 @@
+/home/tadokoro/git/ocean/design_doc/vl/misc/vim/syntax/vl.vim
