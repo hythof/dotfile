@@ -184,7 +184,6 @@ let g:vim_markdown_folding_disabled=1
 " --
 Bundle 'Shougo/unite.vim'
 nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite 
-nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
 nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR>
 nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
@@ -198,6 +197,7 @@ Bundle 'tsukkee/unite-tag'
 
 " --
 Bundle 'Shougo/unite-outline'
+nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
 
 
 " --

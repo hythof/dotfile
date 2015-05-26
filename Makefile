@@ -50,7 +50,7 @@ ubuntu-init:
 	sudo apt-get install aptitude
 	sudo aptitude update && sudo aptitude upgrade
 	sudo aptitude purge nano
-	sudo aptitude install vim-nox zsh git mercurial chromium-browser
+	sudo aptitude install vim-nox zsh git mercurial chromium-browser tmux
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
