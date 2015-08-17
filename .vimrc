@@ -3,8 +3,8 @@ nnoremap J :cn <CR>
 nnoremap K :cN <CR>
 nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
-nnoremap gb :silent execute ':!cd %:h && git blame ' . fnamemodify(expand('%'), ":t") .  '\| less +' . line('w0') \| redraw! <CR>
 nnoremap gl :!git log --graph --decorate --oneline % <CR>
+nnoremap gb :silent execute ":!cd %:h; git blame --date=short -L" . line('w0') . " %:p" \| redraw! <CR>
 au BufRead,BufNewFile *.spa set filetype=spa
 au BufRead,BufNewFile *.vl set filetype=vl
 
