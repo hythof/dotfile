@@ -201,6 +201,8 @@ Bundle 'tsukkee/unite-tag'
 Bundle 'Shougo/unite-outline'
 nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
 
+" --
+Bundle 'kchmck/vim-coffee-script'
 
 " --
 filetype plugin indent on  " required
