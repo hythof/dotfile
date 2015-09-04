@@ -1,5 +1,6 @@
 DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global
 GO_ROOT = $(HOME)/go
+GO14_ROOT = $(HOME)/go1.4
 DOTFILE_DIR = $(shell pwd)
 GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
@@ -35,12 +36,16 @@ git:
 
 go:
 ifeq "$(wildcard $(GO_ROOT))" ""
-	cd ~ && hg clone -u release https://code.google.com/p/go
+	cd ~ && git clone https://github.com/golang/go.git
 else
-	cd ~/go && hg pull && hg update release
+	cd $(GO_ROOT) && git pull
 endif
-	cd  ~/go/src && ./all.bash
-	zsh -c "$(GO_ROOT)/bin/go get code.google.com/p/go.tools/cmd/godoc"
+ifeq "$(wildcard $(GO14_ROOT)/bin/go)" ""
+	cd ~ && cp -pr $(GO_ROOT) $(GO14_ROOT)
+	cd $(GO14_ROOT)/src && git checkout -b release-branch.go1.4 origin/release-branch.go1.4 && ./all.bash
+endif
+	cd  $(GO_ROOT)/src && ./all.bash
+	zsh -c "$(GO_ROOT)/bin/go get golang.org/x/tools/cmd/godoc"
 
 clean:
 	cd ~ && rm ${DOT_FILES}

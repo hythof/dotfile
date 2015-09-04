@@ -1,7 +1,7 @@
 " --( customize )-----------------------------------------
 nnoremap J :cn <CR>
 nnoremap K :cN <CR>
-nnoremap <space>r :<C-u>source $MYVIMRC <CR>
+"nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
 nnoremap gl :!git log --graph --decorate --oneline % <CR>
 nnoremap gb :silent execute ":!cd %:h; git blame --date=short -L" . line('w0') . " %:p" \| redraw! <CR>
@@ -150,17 +150,6 @@ autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>
 autocmd BufWritePost,FileWritePost *.gpg u 
 
 
-" ---( go lang )--------------------------------------
-if $GOROOT != '' && $GOPATH != ''
-    filetype off
-    filetype plugin indent off
-    set rtp+=~/.vim/golang
-    filetype plugin indent on
-    syntax on
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
-endif
-
-
 " ---( vundle )--------------------------------------
 " git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
 set nocompatible " be iMproved, required
@@ -203,6 +192,24 @@ nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
 
 " --
 Bundle 'kchmck/vim-coffee-script'
+
+" --
+Bundle 'fatih/vim-go'
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_autosave = 1
+au FileType go nmap <space>i <Plug>(go-info)
+au FileType go nmap <space>d <Plug>(go-doc-vertical)
+au FileType go nmap <space>r <Plug>(go-run)
+au FileType go nmap <space>b <Plug>(go-build)
+au FileType go nmap <space>t <Plug>(go-test)
+au FileType go nmap <space>c <Plug>(go-coverage)
+au FileType go nmap <space>t <Plug>(go-def-tab)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 
 " --
 filetype plugin indent on  " required
