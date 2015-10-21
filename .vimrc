@@ -169,10 +169,6 @@ let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_lookup_project = 0
 
 " --
-Bundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-
-" --
 Bundle 'Shougo/unite.vim'
 nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite 
 nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR>
