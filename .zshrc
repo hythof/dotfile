@@ -73,7 +73,7 @@ autoload colors
 colors
 case "$TERM" in
 xterm*|kterm*|rxvt*|screen)
-    PROMPT="%{${fg[green]}%}%m@%n%%%{${reset_color}%} "
+    PROMPT="%{${fg[green]}%}%n@%m%%%{${reset_color}%} "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
         PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
     #RPROMPT="[%{${fg[green]}%}%~%{${reset_color}%}]"
