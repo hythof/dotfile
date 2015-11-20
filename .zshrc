@@ -11,6 +11,7 @@ alias gd="git diff --color-words"
 alias gdc="git diff --color-words --cached"                                                     
 alias gs="git status --short --branch"
 alias gl="git log --graph --decorate --oneline --stat"
+alias gll='git log --date=iso --graph --decorate --stat --pretty=format:"%cn %C(red)|%Creset %s %C(yellow)%h%Creset %ce"'
 
 
 # ---( export )-------------------------------------------------
@@ -32,7 +33,7 @@ export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 # http://golang.org/doc/install/source
 export GOROOT=$HOME/go
 export GOPATH=$HOME/gocode
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export GOARCH=amd64
 case ${OSTYPE} in
 darwin*)
