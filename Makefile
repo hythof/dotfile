@@ -46,6 +46,7 @@ ifeq "$(wildcard $(GO14_ROOT)/bin/go)" ""
 endif
 	cd  $(GO_ROOT)/src && ./all.bash
 	zsh -c "$(GO_ROOT)/bin/go get golang.org/x/tools/cmd/godoc"
+	go get golang.org/x/tools/cmd/goimports
 
 clean:
 	cd ~ && rm ${DOT_FILES}
