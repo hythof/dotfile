@@ -5,11 +5,12 @@ DOTFILE_DIR = $(shell pwd)
 GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
 help:
-	@echo "make all     # make install, git, go"
-	@echo "make install # install dot files"
-	@echo "make git     # set git global config"
-	@echo "make go      # install go programming language. depend mercurial. need make install(depend .zshrc)."
-	@echo "make clean   # rm all"
+	@echo "make all       # make install, git, go"
+	@echo "make install   # install dot files"
+	@echo "make git       # set git global config"
+	@echo "make go        # install go programming language. depend mercurial. need make install(depend .zshrc)."
+	@echo "make clean     # rm all"
+	@echo "make html5tidy # install html5tidy"
 	@echo "-- platform --"
 	@echo "make ubuntu-init"
 	@echo "make ubuntu-font"
@@ -51,6 +52,9 @@ endif
 clean:
 	cd ~ && rm ${DOT_FILES}
 
+html5tidy:
+	sudo aptitude install cmake
+	bash bin/install_html5tidy.sh
 
 ubuntu-init:
 	sudo apt-get install aptitude
