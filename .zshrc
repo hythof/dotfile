@@ -11,7 +11,7 @@ alias gd="git diff --color-words"
 alias gdc="git diff --color-words --cached"                                                     
 alias gs="git status --short --branch"
 alias gl="git log --graph --decorate --oneline --stat"
-alias gll='git log --date=iso --graph --decorate --stat --pretty=format:"%cn %C(red)|%Creset %s %C(yellow)%h%Creset %ce"'
+alias gll='git log --graph --decorate --stat --pretty=format:"%C(yellow)%h%Creset %s %C(red)|%Creset %cn %C(yellow)%ce%Creset %cr%C(yellow)%d%Creset"'
 
 
 # ---( export )-------------------------------------------------
