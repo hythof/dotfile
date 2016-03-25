@@ -4,8 +4,8 @@ alias pw="ruby -e 'puts Array.new((ARGV[0] || 32).to_i){ rand(62) }.pack(%q!C*!)
 # ---( alias )-------------------------------------------------
 alias -g L="| less"
 alias -g G="| grep"
-alias l="ls -GlhF"
-alias ll="ls -aGlhF"
+alias l="ls -vGlhF"
+alias ll="ls -vaGlhF"
 alias h="history -i"
 alias gd="git diff --color-words"                                                     
 alias gdc="git diff --color-words --cached"                                                     
