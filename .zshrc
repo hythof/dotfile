@@ -9,6 +9,7 @@ alias ll="ls -vaGlhF"
 alias h="history -i"
 alias gd="git diff"                                                     
 alias gdc="git diff --cached"                                                     
+alias gc="git checkout"
 alias gs="git status --short --branch"
 alias gl="git log --graph --decorate --oneline --stat"
 alias gll='git log --graph --decorate --stat --pretty=format:"%C(yellow)%h%Creset %s %C(red)|%Creset %cn %C(yellow)%ce%Creset %cr%C(yellow)%d%Creset"'
