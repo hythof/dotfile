@@ -11,8 +11,8 @@ alias gd="git diff"
 alias gdc="git diff --cached"                                                     
 alias gc="git checkout"
 alias gs="git status --short --branch"
-alias gl="git log --graph --decorate --oneline --stat"
-alias gll='git log --graph --decorate --stat --pretty=format:"%C(yellow)%h%Creset %s %C(red)|%Creset %cn %C(yellow)%ce%Creset %cr%C(yellow)%d%Creset"'
+alias gl="git log --no-merges --oneline"
+alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
 
 
 # ---( export )-------------------------------------------------
