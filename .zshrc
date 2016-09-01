@@ -11,6 +11,9 @@ alias ga="git add"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gs="git status --short --branch"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gsu="git submodule update -i"
 alias gl="git log --no-merges --oneline"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
 
