@@ -120,8 +120,20 @@ set statusline+=%{'['.&fileformat.']'}
 " vimpath
 let $PATH = $PATH . ':~/.vim/bin' 
 
+"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
+augroup BinaryXXD
+  autocmd!
+  autocmd BufReadPre  *.bin let &binary =1
+  autocmd BufReadPost * if &binary | silent %!xxd -g 1
+  autocmd BufReadPost * set ft=xxd | endif
+  autocmd BufWritePre * if &binary | %!xxd -r | endif
+  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+  autocmd BufWritePost * set nomod | endif
+augroup END
+
+
 " --( ctags )-----------------------------------------
-set tags=tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
+set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
 nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
 
 
@@ -206,6 +218,11 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+" --
+Bundle "vim-erlang/vim-erlang-tags"
+:set runtimepath^=~/.vim/bundle/vim-erlang-tags
+
 
 " --
 filetype plugin indent on  " required
