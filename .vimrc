@@ -126,11 +126,10 @@ augroup BinaryXXD
   autocmd BufReadPre  *.bin let &binary =1
   autocmd BufReadPost * if &binary | silent %!xxd -g 1
   autocmd BufReadPost * set ft=xxd | endif
-  autocmd BufWritePre * if &binary | %!xxd -r | endif
+  autocmd BufWritePre * if &binary | "%!xxd -r" | endif
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
-
 
 " --( ctags )-----------------------------------------
 set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
