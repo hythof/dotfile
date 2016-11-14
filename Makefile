@@ -14,7 +14,6 @@ help:
 	@echo "-- platform --"
 	@echo "make ubuntu-init"
 	@echo "make ubuntu-font"
-	@echo "make ubuntu-terminal-theme"
 
 all:
 	make install
@@ -36,18 +35,9 @@ git:
 	git config --global pull.rebase true
 
 go:
-ifeq "$(wildcard $(GO_ROOT))" ""
-	cd ~ && git clone https://github.com/golang/go.git
-else
-	cd $(GO_ROOT) && git pull
-endif
-ifeq "$(wildcard $(GO14_ROOT)/bin/go)" ""
-	cd ~ && cp -pr $(GO_ROOT) $(GO14_ROOT)
-	cd $(GO14_ROOT)/src && git checkout -b release-branch.go1.4 origin/release-branch.go1.4 && ./all.bash
-endif
-	cd  $(GO_ROOT)/src && ./all.bash
-	zsh -c "$(GO_ROOT)/bin/go get golang.org/x/tools/cmd/godoc"
-	go get golang.org/x/tools/cmd/goimports
+	cd ~; wget https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
+	cd ~; tar -xvf go1.7.linux-amd64.tar.gz
+	cd ~; rm go1.7.linux-amd64.tar.gz
 
 clean:
 	cd ~ && rm ${DOT_FILES}
@@ -72,16 +62,9 @@ ubuntu-font:
 	cd ~/tmp; wget "http://sourceforge.jp/frs/redir.php?m=jaist&f=%2Fmix-mplus-ipa%2F59022%2Fmigu-1m-20130617.zip" -O migu-1m.zip
 	cd ~/tmp; unzip migu-1m.zip
 	cd ~/tmp; cp migu-1m-*/migu*.ttf ~/.fonts/
-	cd ~/tmp; git clone git://github.com/yascentur/Ricty.git
-	(cd ~/tmp/Ricty && sh ricty_generator.sh auto && cp *.ttf ~/.fonts)
-	cd ~/.fonts; rm Inconsolata.otf migu-1m*
+	cd ~/tmp; wget http://www.rs.tus.ac.jp/yyusa/ricty/ricty_generator.sh
+	cd ~/tmp; wget http://www.rs.tus.ac.jp/yyusa/ricty/ricty_discord_converter.pe
+	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Bold.ttf
+	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Regular.ttf
+	cd ~/tmp; sh ricty_generator.sh auto && cp *.ttf ~/.fonts
 	gnome-tweak-tool &
-
-ubuntu-terminal-theme:
-ifeq "$(wildcard $(GNOME_TERMINAL_COLOR_DIR))" ""
-	mkdir -p ~/tmp
-	(cd ~/tmp && git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git)
-else
-	(cd ~/tmp/gnome-terminal-colors-solarized && git pull)
-endif
-	(cd ~/tmp/gnome-terminal-colors-solarized && ./install.sh)
