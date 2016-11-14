@@ -30,6 +30,7 @@ set tabstop=4
 set shiftwidth=4
 "ファイル内の <Tab> が対応する空白の数
 set tabstop=4
+set softtabstop=4
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 
@@ -121,15 +122,15 @@ set statusline+=%{'['.&fileformat.']'}
 let $PATH = $PATH . ':~/.vim/bin' 
 
 "バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
-augroup BinaryXXD
-  autocmd!
-  autocmd BufReadPre  *.bin let &binary =1
-  autocmd BufReadPost * if &binary | silent %!xxd -g 1
-  autocmd BufReadPost * set ft=xxd | endif
-  autocmd BufWritePre * if &binary | "%!xxd -r" | endif
-  autocmd BufWritePost * if &binary | silent %!xxd -g 1
-  autocmd BufWritePost * set nomod | endif
-augroup END
+"augroup BinaryXXD
+"  autocmd!
+"  autocmd BufReadPre  *.bin let &binary =1
+"  autocmd BufReadPost * if &binary | silent %!xxd -g 1
+"  autocmd BufReadPost * set ft=xxd | endif
+"  autocmd BufWritePre * if &binary | "%!xxd -r" | endif
+"  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+"  autocmd BufWritePost * set nomod | endif
+"augroup END
 
 " --( ctags )-----------------------------------------
 set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
@@ -182,8 +183,8 @@ let g:pymode_rope_lookup_project = 0
 " --
 Bundle 'Shougo/unite.vim'
 nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite 
-nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR>
-nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR>
+nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR> /
+nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR> /
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:bd<CR>
 
@@ -220,8 +221,7 @@ let g:go_fmt_command = "goimports"
 
 " --
 Bundle "vim-erlang/vim-erlang-tags"
-:set runtimepath^=~/.vim/bundle/vim-erlang-tags
-
+:set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
 " --
 filetype plugin indent on  " required
