@@ -5,15 +5,18 @@ DOTFILE_DIR = $(shell pwd)
 GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
 help:
-	@echo "make all       # make install, git, go"
+	@echo "make all       # make install, git, go, haskell"
 	@echo "make install   # install dot files"
 	@echo "make git       # set git global config"
 	@echo "make go        # install go programming language. depend mercurial. need make install(depend .zshrc)."
+	@echo "make haskell   # install haskell"
 	@echo "make clean     # rm all"
 	@echo "make html5tidy # install html5tidy"
-	@echo "-- platform --"
+	@echo "-- ubuntu --"
 	@echo "make ubuntu-init"
 	@echo "make ubuntu-font"
+	@echo "-- move other machine --"
+	@echo "make snap"
 
 all:
 	make install
@@ -38,6 +41,11 @@ go:
 	cd ~; wget https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
 	cd ~; tar -xvf go1.7.linux-amd64.tar.gz
 	cd ~; rm go1.7.linux-amd64.tar.gz
+
+haskell:
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442
+	echo 'deb http://download.fpcomplete.com/debian jessie main'|sudo tee /etc/apt/sources.list.d/fpco.list
+	sudo aptitude update && sudo aptitude install ghc stack
 
 clean:
 	cd ~ && rm ${DOT_FILES}
@@ -68,3 +76,6 @@ ubuntu-font:
 	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Regular.ttf
 	cd ~/tmp; sh ricty_generator.sh auto && cp *.ttf ~/.fonts
 	gnome-tweak-tool &
+
+snap:
+	cd ~; tar -zcvf /tmp/home.tar.gz .ssh .gnupg git

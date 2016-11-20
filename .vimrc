@@ -183,6 +183,8 @@ Bundle 'kana/vim-filetype-haskell'
 
 Bundle 'Twinside/vim-hoogle'
 
+Bundle 'nbouscal/vim-stylish-haskell'
+
 " -- python
 Bundle "klen/python-mode"
 let g:pymode_doc_key = 'H'
