@@ -3,10 +3,19 @@ nnoremap J :cn <CR>
 nnoremap K :cN <CR>
 "nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
+nnoremap gs :Gstatus
 nnoremap gl :!git log --graph --decorate --oneline % <CR>
-nnoremap gb :silent execute ":!cd %:h; git blame --date=short -L" . line('w0') . " %:p" \| redraw!
+nnoremap gb :Gblame
+nnoremap ga :Gadd
+nnoremap gc :Gcommit
+nnoremap gd :Gdiff
 au BufRead,BufNewFile *.spa set filetype=spa
 au BufRead,BufNewFile *.vl set filetype=vl
+set rtp+=/home/tadokoro/git/spa/misc/vim/
+exe "set runtimepath+=/home/tadokoro/git/spa/misc/vim/"
+au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
+exe "set runtimepath+=/home/tadokoro/git/ocean/design_doc/vl/misc/vim/"
+au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -20,7 +29,7 @@ set nocompatible
 
 "自動改行をOff
 set nowrap
-set formatoptions=q    
+set formatoptions=q
 
 "タブの代わりに空白文字を挿入する
 set expandtab
@@ -119,7 +128,7 @@ set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']'}
 set statusline+=%{'['.&fileformat.']'}
 
 " vimpath
-let $PATH = $PATH . ':~/.vim/bin' 
+let $PATH = $PATH . ':~/.vim/bin'
 
 "バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
 "augroup BinaryXXD
@@ -159,7 +168,7 @@ autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expan
 autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
 " Undo the encryption so we are back in the normal text, directly
 " after the file has been written.
-autocmd BufWritePost,FileWritePost *.gpg u 
+autocmd BufWritePost,FileWritePost *.gpg u
 
 
 " ---( vundle )--------------------------------------
@@ -169,7 +178,12 @@ filetype off     " required
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
-" --
+" -- haskell
+Bundle 'kana/vim-filetype-haskell'
+
+Bundle 'Twinside/vim-hoogle'
+
+" -- python
 Bundle "klen/python-mode"
 let g:pymode_doc_key = 'H'
 let g:pymode_folding = 0
@@ -180,28 +194,31 @@ let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_lookup_project = 0
 
-" --
+" -- vim
 Bundle 'Shougo/unite.vim'
-nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite 
+nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite
 nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR> /
 nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR> /
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:bd<CR>
 
-" --
 Bundle 'Shougo/vimproc.vim'
 
-" --
 Bundle 'tsukkee/unite-tag'
 
-" --
 Bundle 'Shougo/unite-outline'
 nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
 
-" --
+Bundle 'bronson/vim-trailing-whitespace'
+let g:extra_whitespace_ignored_filetypes = ['markdown']
+
+
+Bundle 'airblade/vim-gitgutter'
+
+" -- coffee script
 Bundle 'kchmck/vim-coffee-script'
 
-" --
+" -- go
 Bundle 'fatih/vim-go'
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_autosave = 1
@@ -219,9 +236,12 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-" --
+" -- erlang
 Bundle "vim-erlang/vim-erlang-tags"
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
+
+" -- git
+Bundle 'tpope/vim-fugitive'
 
 " --
 filetype plugin indent on  " required
