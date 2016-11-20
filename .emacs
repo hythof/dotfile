@@ -67,7 +67,6 @@
 ;; Anything
 ;;====================================
 (require 'anything)
-(require 'anything-config)
 (setq anything-sources
       '(anything-c-source-buffers+
 ;        anything-c-source-colors
@@ -91,19 +90,19 @@
 ;;====================================
 ;; Yasnippet
 ;;====================================
-(add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c/")
-(require 'yasnippet)
-(require 'anything-c-yasnippet)
-(setq anything-c-yas-space-match-any-greedy t) ;スペース区切りで絞り込めるようにする デフォルトは nil
-(global-set-key (kbd "C-c y") 'anything-c-yas-complete)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet-0.6.1c//snippets")
+;(add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c/")
+;(require 'yasnippet)
+;(require 'anything-c-yasnippet)
+;(setq anything-c-yas-space-match-any-greedy t) ;スペース区切りで絞り込めるようにする デフォルトは nil
+;(global-set-key (kbd "C-c y") 'anything-c-yas-complete)
+;(yas/initialize)
+;(yas/load-directory "~/.emacs.d/yasnippet-0.6.1c//snippets")
 
 
 ;;====================================
 ;; ECB
 ;;====================================
-(require 'ecb-autoloads)
+(require 'ecb)
 (global-set-key "\C-o" 'ecb-goto-window-directories)
 (custom-set-variables
  '(ecb-layout-name "left13")
