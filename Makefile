@@ -43,9 +43,7 @@ go:
 	cd ~; rm go1.7.linux-amd64.tar.gz
 
 haskell:
-	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442
-	echo 'deb http://download.fpcomplete.com/debian jessie main'|sudo tee /etc/apt/sources.list.d/fpco.list
-	sudo aptitude update && sudo aptitude install ghc stack
+	sudo aptitude install haskell-stack
 
 clean:
 	cd ~ && rm ${DOT_FILES}
