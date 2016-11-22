@@ -6,7 +6,6 @@ nnoremap <space>e :e %:h/
 nnoremap gs :Gstatus
 nnoremap gl :!git log --graph --decorate --oneline % <CR>
 nnoremap gb :Gblame
-nnoremap ga :Gadd
 nnoremap gc :Gcommit
 nnoremap gd :Gdiff
 au BufRead,BufNewFile *.spa set filetype=spa
