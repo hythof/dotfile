@@ -245,4 +245,5 @@ Bundle "vim-erlang/vim-erlang-tags"
 Bundle 'tpope/vim-fugitive'
 
 " --
+filetype on  " required
 filetype plugin indent on  " required
