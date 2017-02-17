@@ -8,7 +8,6 @@ help:
 	@echo "make all       # make install, git, go, haskell"
 	@echo "make install   # install dot files"
 	@echo "make git       # set git global config"
-	@echo "make go        # install go programming language. depend mercurial. need make install(depend .zshrc)."
 	@echo "make haskell   # install haskell"
 	@echo "make clean     # rm all"
 	@echo "make html5tidy # install html5tidy"
@@ -21,7 +20,6 @@ help:
 all:
 	make install
 	make git
-	make go
 
 install:
 	git pull
@@ -37,16 +35,13 @@ git:
 	git config --global --replace-all core.attributesfile ~/.gitattributes_global
 	git config --global pull.rebase true
 
-go:
-	cd ~; wget https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
-	cd ~; tar -xvf go1.7.linux-amd64.tar.gz
-	cd ~; rm go1.7.linux-amd64.tar.gz
-
 haskell:
 	sudo aptitude install haskell-stack
 
 clean:
 	cd ~ && rm ${DOT_FILES}
+	sudo apt-get autoremove
+	sudo aptitude autoclean
 
 html5tidy:
 	sudo aptitude install cmake
@@ -57,7 +52,7 @@ ubuntu-init:
 	sudo aptitude update && sudo aptitude upgrade
 	sudo aptitude purge nano unity-webapps-common firefox
 	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox zsh git mercurial chromium-browser tmux libssl-dev ghc
+	sudo aptitude install vim-nox zsh git mercurial chromium-browser tmux libssl-dev ghc golang-go
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
@@ -69,7 +64,6 @@ ubuntu-font:
 	cd ~/tmp; unzip migu-1m.zip
 	cd ~/tmp; cp migu-1m-*/migu*.ttf ~/.fonts/
 	cd ~/tmp; wget http://www.rs.tus.ac.jp/yyusa/ricty/ricty_generator.sh
-	cd ~/tmp; wget http://www.rs.tus.ac.jp/yyusa/ricty/ricty_discord_converter.pe
 	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Bold.ttf
 	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Regular.ttf
 	cd ~/tmp; sh ricty_generator.sh auto && cp *.ttf ~/.fonts
