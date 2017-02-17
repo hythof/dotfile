@@ -52,7 +52,7 @@ ubuntu-init:
 	sudo aptitude update && sudo aptitude upgrade
 	sudo aptitude purge nano unity-webapps-common firefox
 	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox zsh git mercurial chromium-browser tmux libssl-dev ghc golang-go
+	sudo aptitude install vim-nox-py2 zsh git mercurial chromium-browser tmux libssl-dev ghc golang-go
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
