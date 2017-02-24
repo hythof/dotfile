@@ -6,6 +6,7 @@ GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
 help:
 	@echo "make all       # make install, git, go, haskell"
+	@echo "-- manual --"
 	@echo "make install   # install dot files"
 	@echo "make git       # set git global config"
 	@echo "make haskell   # install haskell"
@@ -68,6 +69,3 @@ ubuntu-font:
 	cd ~/tmp; wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-Regular.ttf
 	cd ~/tmp; sh ricty_generator.sh auto && cp *.ttf ~/.fonts
 	gnome-tweak-tool &
-
-snap:
-	cd ~; tar -zcvf /tmp/home.tar.gz .ssh .gnupg git
