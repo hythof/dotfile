@@ -24,7 +24,11 @@ export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
 
 # shell path
-export PATH=$HOME/local/bin:$HOME/bin:$HOME/.vim/bin:$HOME/.cabal/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=$HOME/.rbenv/shims:$PATH
+export PATH=$HOME/.vim/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/local/bin:$PATH
+export PATH=/usr/sbin:/usr/local/sbin:$PATH
 export EDITOR=vi
 
 # for pager

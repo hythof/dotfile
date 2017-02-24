@@ -241,6 +241,10 @@ let g:go_fmt_command = "goimports"
 Bundle "vim-erlang/vim-erlang-tags"
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
+" -- rails
+Bundle "tpope/vim-rails.git"
+Bundle "tpope/vim-bundler.git"
+
 " -- git
 Bundle 'tpope/vim-fugitive'
 
