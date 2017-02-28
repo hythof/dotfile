@@ -140,6 +140,9 @@ let $PATH = $PATH . ':~/.vim/bin'
 "  autocmd BufWritePost * set nomod | endif
 "augroup END
 
+" --( changelog )-----------------------------------------
+let g:changelog_username = "Hiroshi"
+
 " --( ctags )-----------------------------------------
 set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
 nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
