@@ -8,6 +8,8 @@ nnoremap gl :!git log --graph --decorate --oneline % <CR>
 nnoremap gb :Gblame
 nnoremap gc :Gcommit
 nnoremap gd :Gdiff
+nnoremap <space>n :cn <CR>
+nnoremap <space>p :cp <CR>
 au BufRead,BufNewFile *.spa set filetype=spa
 au BufRead,BufNewFile *.vl set filetype=vl
 set rtp+=/home/tadokoro/git/spa/misc/vim/
@@ -140,6 +142,10 @@ let $PATH = $PATH . ':~/.vim/bin'
 "  autocmd BufWritePost * set nomod | endif
 "augroup END
 
+" vimgrepを使いやすく
+au QuickfixCmdPost vimgrep cw
+nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
 
@@ -244,12 +250,18 @@ let g:go_fmt_command = "goimports"
 Bundle "vim-erlang/vim-erlang-tags"
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
+" -- ruby
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
+
 " -- rails
 Bundle "tpope/vim-rails.git"
 Bundle "tpope/vim-bundler.git"
 
 " -- git
 Bundle 'tpope/vim-fugitive'
+
+" -- git :Ag
+Bundle 'rking/ag.vim'
 
 " --
 filetype on  " required
