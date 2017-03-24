@@ -5,22 +5,21 @@ DOTFILE_DIR = $(shell pwd)
 GNOME_TERMINAL_COLOR_DIR = $(HOME)/tmp/gnome-terminal-colors-solarized
 
 help:
-	@echo "make all       # make install, git, go, haskell"
+	@echo "make ubuntu"
 	@echo "-- manual --"
 	@echo "make install   # install dot files"
 	@echo "make git       # set git global config"
 	@echo "make haskell   # install haskell"
 	@echo "make clean     # rm all"
 	@echo "make html5tidy # install html5tidy"
-	@echo "-- ubuntu --"
 	@echo "make ubuntu-init"
 	@echo "make ubuntu-font"
-	@echo "-- move other machine --"
-	@echo "make snap"
 
-all:
+ubuntu:
 	make install
 	make git
+	make ubuntu-init
+	make ubuntu-font
 
 install:
 	git pull
@@ -53,7 +52,7 @@ ubuntu-init:
 	sudo aptitude update && sudo aptitude upgrade
 	sudo aptitude purge nano unity-webapps-common firefox
 	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox-py2 zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go docker.io
+	sudo aptitude install vim-nox-py2 zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go docker.io compizconfig-settings-manager nodejs
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
