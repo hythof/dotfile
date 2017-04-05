@@ -7,12 +7,12 @@ alias -g G="| grep"
 alias l="ls -vGlhF"
 alias ll="ls -vaGlhF"
 alias h="history -i"
-alias gp="git push"
+alias gp="git pull"
 alias ga="git add"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gs="git status --short --branch"
-alias gc="git commit"
+alias gc="git checkout"
 alias gca="git commit -a"
 alias gsu="git submodule update -i"
 alias gl="git log --no-merges --oneline"
@@ -40,18 +40,8 @@ export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 
 # go
 # http://golang.org/doc/install/source
-export GOROOT=$HOME/go
-export GOPATH=$HOME/gocode
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export GOARCH=amd64
-case ${OSTYPE} in
-darwin*)
-    export GOOS=darwin
-    ;;
-linux*)
-    export GOOS=linux
-    ;;
-esac
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info
