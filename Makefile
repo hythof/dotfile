@@ -12,7 +12,7 @@ help:
 	@echo "make haskell   # install haskell"
 	@echo "make clean     # rm all"
 	@echo "make html5tidy # install html5tidy"
-	@echo "make ubuntu"
+	@echo "make ubuntu    # install for desktop"
 
 ubuntu:
 	make ubuntu-init
@@ -51,7 +51,7 @@ ubuntu-init:
 	sudo aptitude update && sudo aptitude upgrade
 	sudo aptitude purge nano unity-webapps-common firefox
 	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go docker.io compizconfig-settings-manager nodejs
+	sudo aptitude install vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
