@@ -149,10 +149,15 @@ nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . exp
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
 
+" --( web )-----------------------------------------
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype erb setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
 " --( ctags )-----------------------------------------
 set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
 nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
-
 
 " ---( Gnu PG )----------------------------------------
 " Transparent editing of gpg encrypted files.
@@ -262,6 +267,11 @@ Bundle 'tpope/vim-fugitive'
 
 " -- git :Ag
 Bundle 'rking/ag.vim'
+
+" -- emmet
+Bundle 'mattn/emmet-vim'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 " --
 filetype on  " required
