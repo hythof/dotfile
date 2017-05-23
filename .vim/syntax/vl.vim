@@ -1,1 +1,1 @@
-/home/tadokoro/git/ocean/design_doc/vl/misc/vim/syntax/vl.vim
+/home/hiroshi/git/vl/misc/vim/syntax/vl.vim
