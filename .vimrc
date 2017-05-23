@@ -262,6 +262,9 @@ autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 Bundle "tpope/vim-rails.git"
 Bundle "tpope/vim-bundler.git"
 
+" -- purescript
+Bundle "raichoo/purescript-vim"
+
 " -- git
 Bundle 'tpope/vim-fugitive'
 
