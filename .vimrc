@@ -116,8 +116,8 @@ set directory=~/tmp
 " ~ファイルの保存先
 set backupdir=~/tmp
 
-" カーソル行を目立たせる
-:set cursorline
+" カーソル行を目立たせる(重い)
+":set cursorline
 ":set cursorcolumn
 
 " ステータス行
