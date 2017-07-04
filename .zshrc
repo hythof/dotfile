@@ -44,6 +44,7 @@ export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 # http://golang.org/doc/install/source
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
 
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info
