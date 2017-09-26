@@ -260,6 +260,7 @@ autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 
 " -- rails
 Bundle "tpope/vim-rails.git"
+Bundle "janko-m/vim-test.git"
 Bundle "tpope/vim-bundler.git"
 
 " -- purescript
@@ -275,6 +276,9 @@ Bundle 'rking/ag.vim'
 Bundle 'mattn/emmet-vim'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+" -- Type Script
+Bundle 'leafgarland/typescript-vim'
 
 " --
 filetype on  " required
