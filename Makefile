@@ -49,9 +49,9 @@ html5tidy:
 ubuntu-init:
 	sudo apt-get install aptitude
 	sudo aptitude update && sudo aptitude upgrade
-	sudo aptitude purge nano unity-webapps-common firefox
+	sudo aptitude purge nano firefox unity-webapps-common ubuntu-web-launchers
 	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs
+	sudo aptitude install vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
