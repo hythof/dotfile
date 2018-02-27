@@ -35,7 +35,7 @@ git:
 	git config --global pull.rebase true
 
 haskell:
-	sudo aptitude install haskell-stack
+	sudo aptitude install -y haskell-stack
 
 clean:
 	cd ~ && rm ${DOT_FILES}
@@ -43,19 +43,19 @@ clean:
 	sudo aptitude autoclean
 
 html5tidy:
-	sudo aptitude install cmake
+	sudo aptitude install -y cmake
 	bash bin/install_html5tidy.sh
 
 ubuntu-init:
-	sudo apt-get install aptitude
-	sudo aptitude update && sudo aptitude upgrade
-	sudo aptitude purge nano firefox unity-webapps-common ubuntu-web-launchers
-	sudo apt-get remove --purge "libreoffice*"
-	sudo aptitude install vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv virtualenvwrapper
+	sudo apt-get install -y aptitude
+	sudo aptitude update && sudo aptitude upgrade -y
+	sudo aptitude purge -y nano firefox unity-webapps-common ubuntu-web-launchers
+	sudo apt-get remove -y --purge "libreoffice*"
+	sudo aptitude install -y vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv virtualenvwrapper
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:
-	sudo aptitude install fontforge gnome-tweak-tool
+	sudo aptitude install -y fontforge gnome-tweak-tool
 	mkdir -p ~/.fonts
 	mkdir -p ~/tmp
 	wget http://levien.com/type/myfonts/Inconsolata.otf -O ~/.fonts/Inconsolata.otf

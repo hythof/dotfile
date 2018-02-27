@@ -88,6 +88,7 @@ xterm*|kterm*|rxvt*|screen)
     PROMPT='%m:%c%# '
     ;;
 esac
+TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
 # ---( zsh )-------------------------------------------------
 HISTFILE=$HOME/.zsh-history     # 履歴をファイルに保存する
