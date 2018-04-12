@@ -14,6 +14,29 @@ help:
 	@echo "make html5tidy # install html5tidy"
 	@echo "make ubuntu    # install for desktop"
 
+update:
+	(cd .vim/bundle/ag.vim/; git pull)
+	(cd .vim/bundle/emmet-vim/; git pull)
+	(cd .vim/bundle/purescript-vim/; git pull)
+	(cd .vim/bundle/python-mode/; git pull)
+	(cd .vim/bundle/typescript-vim/; git pull)
+	(cd .vim/bundle/unite.vim/; git pull)
+	(cd .vim/bundle/unite-outline/; git pull)
+	(cd .vim/bundle/unite-tag/; git pull)
+	(cd .vim/bundle/vimproc.vim/; git pull)
+	(cd .vim/bundle/vim-bundler/; git pull)
+	(cd .vim/bundle/vim-coffee-script/; git pull)
+	(cd .vim/bundle/vim-erlang-tags/; git pull)
+	(cd .vim/bundle/vim-filetype-haskell/; git pull)
+	(cd .vim/bundle/vim-fugitive/; git pull)
+	(cd .vim/bundle/vim-gitgutter/; git pull)
+	(cd .vim/bundle/vim-go/; git pull)
+	(cd .vim/bundle/vim-hoogle/; git pull)
+	(cd .vim/bundle/vim-rails/; git pull)
+	(cd .vim/bundle/vim-stylish-haskell/; git pull)
+	(cd .vim/bundle/vim-test/; git pull)
+	(cd .vim/bundle/vim-trailing-whitespace/; git pull)
+
 ubuntu:
 	make ubuntu-init
 	make ubuntu-font
