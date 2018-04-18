@@ -185,21 +185,19 @@ autocmd BufWritePost,FileWritePost *.gpg u
 
 
 " ---( vundle )--------------------------------------
-" git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
 set nocompatible " be iMproved, required
 filetype off     " required
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+
+" -- plug begin
+call plug#begin('~/.vim/plugged')
 
 " -- haskell
-Bundle 'kana/vim-filetype-haskell'
-
-Bundle 'Twinside/vim-hoogle'
-
-Bundle 'nbouscal/vim-stylish-haskell'
+Plug 'kana/vim-filetype-haskell'
+Plug 'Twinside/vim-hoogle'
+Plug 'nbouscal/vim-stylish-haskell'
 
 " -- python
-Bundle "klen/python-mode"
+Plug 'klen/python-mode'
 let g:pymode_doc_key = 'H'
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 1
@@ -210,31 +208,17 @@ let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_lookup_project = 0
 
 " -- vim
-Bundle 'Shougo/unite.vim'
-nnoremap <space><space> :<C-u>Unite -no-split source <CR> :<C-u>Unite
-nnoremap <space>b :<C-u>Unite -auto-resize buffer<CR> /
-nnoremap <space>f :<C-u>Unite -auto-resize file_rec/async<CR> /
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :bd<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:bd<CR>
-
-Bundle 'Shougo/vimproc.vim'
-
-Bundle 'tsukkee/unite-tag'
-
-Bundle 'Shougo/unite-outline'
-nnoremap <space>o :<C-u>Unite -auto-resize -auto-highlight outline<CR>
-
-Bundle 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 let g:extra_whitespace_ignored_filetypes = ['markdown']
 
-
-Bundle 'airblade/vim-gitgutter'
+" -- git gutter
+Plug 'airblade/vim-gitgutter'
 
 " -- coffee script
-Bundle 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 " -- go
-Bundle 'fatih/vim-go'
+Plug 'fatih/vim-go'
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_autosave = 1
 au FileType go nmap <space>i <Plug>(go-info)
@@ -252,33 +236,43 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
 " -- erlang
-Bundle "vim-erlang/vim-erlang-tags"
+Plug 'vim-erlang/vim-erlang-tags'
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
 " -- ruby
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 
 " -- rails
-Bundle "tpope/vim-rails.git"
-Bundle "janko-m/vim-test.git"
-Bundle "tpope/vim-bundler.git"
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'janko-m/vim-test'
 
 " -- purescript
-Bundle "raichoo/purescript-vim"
+Plug 'raichoo/purescript-vim'
 
 " -- git
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " -- git :Ag
-Bundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 " -- emmet
-Bundle 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 " -- Type Script
-Bundle 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
+
+" -- fzf
+Plug 'junegunn/fzf.vim'
+nmap ; :Buffers
+nmap f :Files
+nmap t :Tags
+set rtp+=~/.fzf
+
+" -- plug end
+call plug#end()
 
 " --
 filetype on  " required

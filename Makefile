@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global .fzf
 GO_ROOT = $(HOME)/go
 GO14_ROOT = $(HOME)/go1.4
 DOTFILE_DIR = $(shell pwd)
@@ -49,6 +49,7 @@ install:
 	git submodule sync
 	git submodule update
 	cd ~ && ln -sf $(foreach f, $(DOT_FILES), $(DOTFILE_DIR)/$(f)) .
+	yes | ~/.fzf/install
 	mkdir -p ~/tmp
 
 git:

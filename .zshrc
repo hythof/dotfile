@@ -22,7 +22,6 @@ alias gsu="git submodule update -i"
 alias gl="git log --no-merges --oneline"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
 
-
 # ---( export )-------------------------------------------------
 # git
 export GIT_AUTHOR_NAME=`whoami`
@@ -35,6 +34,7 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=$HOME/.vim/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export EDITOR=vi
+export SHELL=`which zsh`
 
 # for pager
 export LESSCHARSET=utf-8
@@ -157,3 +157,5 @@ zstyle ':completion:*:default' menu select=1
 
 # --( 環境依存 )-----------------------------------------------
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
