@@ -1,22 +1,23 @@
 " --( customize )-----------------------------------------
-nnoremap J :cn <CR>
-nnoremap K :cN <CR>
-"nnoremap <space>r :<C-u>source $MYVIMRC <CR>
 nnoremap <space>e :e %:h/
 nnoremap gs :Gstatus
-nnoremap gl :!git log --graph --decorate --oneline % <CR>
+nnoremap gl :!git log --graph --decorate --oneline % <cr>
 nnoremap gb :Gblame
 nnoremap gc :Gcommit
 nnoremap gd :Gdiff
-nnoremap <space>n :cn <CR>
-nnoremap <space>p :cp <CR>
-au BufRead,BufNewFile *.spa set filetype=spa
-au BufRead,BufNewFile *.vl set filetype=vl
-set rtp+=/home/tadokoro/git/spa/misc/vim/
-exe "set runtimepath+=/home/tadokoro/git/spa/misc/vim/"
-au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
-exe "set runtimepath+=/home/tadokoro/git/ocean/design_doc/vl/misc/vim/"
-au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
+nnoremap <space>r :source ~/.vimrc <cr>:e ~/.vimrc <cr>
+nnoremap <space>b :Buffers <cr>
+nnoremap <space>f :Files <cr>
+nnoremap <space>t :terminal ++curwin ++noclose <cr>
+nnoremap <space>v :vsplit <cr>
+nnoremap <space>h :split <cr>
+"au BufRead,BufNewFile *.spa set filetype=spa
+"au BufRead,BufNewFile *.vl set filetype=vl
+"set rtp+=/home/hiroshi/git/spa/misc/vim/
+"exe 'set runtimepath+=/home/hiroshi/git/spa/misc/vim/'
+"au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
+"exe 'set runtimepath+=/home/hiroshi/git/ocean/design_doc/vl/misc/vim/'
+"au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -34,13 +35,13 @@ set formatoptions=q
 
 "タブの代わりに空白文字を挿入する
 set expandtab
-"タブはスペースx4
-set tabstop=4
+"タブはスペースx2
+set tabstop=2
 "シフト移動幅
-set shiftwidth=4
+set shiftwidth=2
 "ファイル内の <Tab> が対応する空白の数
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 
@@ -80,22 +81,12 @@ syntax on
 "検索結果をハイライト
 set hlsearch
 
-"ウィンドウを最大化して起動
-au GUIEnter * simalt ~x
-
 " ウィンドウを開く向きを指定
 set splitright
 "set splitbelow
 
 " プレビューウィンドウの高さ指定
 set previewheight=20
-
-"入力モード時、ステータスラインのカラーを変更
-augroup InsertHook
-autocmd!
-autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-augroup END
 
 "全角スペースを視覚化
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
@@ -121,6 +112,7 @@ set backupdir=~/tmp
 ":set cursorcolumn
 
 " ステータス行
+highlight StatusLine ctermbg=gray ctermfg=black
 set laststatus=2
 set statusline=%<%F\ %m%r%h%w
 set statusline+=%=
@@ -149,15 +141,12 @@ nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . exp
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
 
-" --( web )-----------------------------------------
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype css setlocal ts=2 sts=2 sw=2
-autocmd Filetype erb setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-
 " --( ctags )-----------------------------------------
-set tags=./tags;~ " カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
-nmap <C-]> g<C-]> " 複数候補時に選択肢を表示
+" カレントディレクトリからルートへ向けて再起検索、~で検索打ち止め
+set tags=./tags;~
+
+" 複数候補時に選択肢を表示
+nmap <C-]> g<C-]>
 
 " ---( Gnu PG )----------------------------------------
 " Transparent editing of gpg encrypted files.
@@ -184,7 +173,8 @@ autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>
 autocmd BufWritePost,FileWritePost *.gpg u
 
 
-" ---( vundle )--------------------------------------
+" ---( Plugins )--------------------------------------
+" -- off
 set nocompatible " be iMproved, required
 filetype off     " required
 
@@ -207,12 +197,9 @@ let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_lookup_project = 0
 
-" -- vim
+" -- show trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
 let g:extra_whitespace_ignored_filetypes = ['markdown']
-
-" -- git gutter
-Plug 'airblade/vim-gitgutter'
 
 " -- coffee script
 Plug 'kchmck/vim-coffee-script'
@@ -235,25 +222,28 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-" -- erlang
+" -- Erlang
 Plug 'vim-erlang/vim-erlang-tags'
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
-" -- ruby
+" -- Ruby
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 
-" -- rails
+" -- Rails
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
 
-" -- purescript
+" -- PureScript
 Plug 'raichoo/purescript-vim'
 
-" -- git
+" -- :Gblame
 Plug 'tpope/vim-fugitive'
 
-" -- git :Ag
+" -- show changing on the staging
+Plug 'airblade/vim-gitgutter'
+
+" -- :Ag
 Plug 'rking/ag.vim'
 
 " -- emmet
@@ -266,14 +256,21 @@ Plug 'leafgarland/typescript-vim'
 
 " -- fzf
 Plug 'junegunn/fzf.vim'
-nmap ; :Buffers
-nmap f :Files
-nmap t :Tags
 set rtp+=~/.fzf
+let g:fzf_layout = { 'right': '~40%' }
+
+" -- :Goyo
+Plug 'junegunn/goyo.vim'
 
 " -- plug end
 call plug#end()
 
-" --
+" -- on
 filetype on  " required
 filetype plugin indent on  " required
+
+" 環境依存
+if filereadable(expand('~/.vimrc.local'))
+  " :command! ProjectName lcd /path/to/project | :Files
+  source ~/.vimrc.local
+endif
