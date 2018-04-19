@@ -75,7 +75,7 @@ ubuntu-init:
 	sudo aptitude update && sudo aptitude upgrade -y
 	sudo aptitude purge -y nano firefox unity-webapps-common ubuntu-web-launchers thunderbird
 	sudo apt-get remove -y --purge "libreoffice*"
-	sudo aptitude install -y vim-nox zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv virtualenvwrapper docker.io
+	sudo aptitude install -y vim-gtk xclip zsh git tig silversearcher-ag iotop mercurial chromium-browser tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv virtualenvwrapper docker.io
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
 ubuntu-font:

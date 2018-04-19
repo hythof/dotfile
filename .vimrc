@@ -1,16 +1,19 @@
 " --( customize )-----------------------------------------
-nnoremap <space>e :e %:h/
-nnoremap gs :Gstatus
-nnoremap gl :!git log --graph --decorate --oneline % <cr>
-nnoremap gb :Gblame
-nnoremap gc :Gcommit
-nnoremap gd :Gdiff
-nnoremap <space>r :source ~/.vimrc <cr>:e ~/.vimrc <cr>
-nnoremap <space>b :Buffers <cr>
-nnoremap <space>f :Files <cr>
-nnoremap <space>t :terminal ++curwin ++noclose <cr>
-nnoremap <space>v :vsplit <cr>
-nnoremap <space>h :split <cr>
+nnoremap s <Nop>
+nnoremap sb :Buffers <cr>
+nnoremap sd :bp <cr> bd # <cr>
+nnoremap se :e %:h/
+nnoremap sf :Files <cr>
+nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
+nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+nnoremap sv :vsplit <cr> :Buffer <cr>
+nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sgs :Gstatus <cr>
+nnoremap sgb :Gblame <cr>
+nnoremap sgd :Gdiff <cr>
+
+" --( customize )-----------------------------------------
 "au BufRead,BufNewFile *.spa set filetype=spa
 "au BufRead,BufNewFile *.vl set filetype=vl
 "set rtp+=/home/hiroshi/git/spa/misc/vim/
@@ -35,13 +38,13 @@ set formatoptions=q
 
 "タブの代わりに空白文字を挿入する
 set expandtab
-"タブはスペースx2
-set tabstop=2
+"タブはスペースx4
+set tabstop=4
 "シフト移動幅
-set shiftwidth=2
+set shiftwidth=4
 "ファイル内の <Tab> が対応する空白の数
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 
@@ -138,6 +141,9 @@ let $PATH = $PATH . ':~/.vim/bin'
 au QuickfixCmdPost vimgrep cw
 nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
+" sync clipboard
+set clipboard=unnamedplus
+
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
 
@@ -208,13 +214,13 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'fatih/vim-go'
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_autosave = 1
-au FileType go nmap <space>i <Plug>(go-info)
-au FileType go nmap <space>d <Plug>(go-doc-vertical)
-au FileType go nmap <space>r <Plug>(go-run)
-au FileType go nmap <space>b <Plug>(go-build)
-au FileType go nmap <space>t <Plug>(go-test)
-au FileType go nmap <space>c <Plug>(go-coverage)
-au FileType go nmap <space>t <Plug>(go-def-tab)
+au FileType go nmap <C-i> <Plug>(go-info)
+au FileType go nmap <C-d> <Plug>(go-doc-vertical)
+"au FileType go nmap <C-r> <Plug>(go-run)
+"au FileType go nmap <C-b> <Plug>(go-build)
+"au FileType go nmap <C-t> <Plug>(go-test)
+"au FileType go nmap <C-c> <Plug>(go-coverage)
+"au FileType go nmap <C-t> <Plug>(go-def-tab)
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -243,9 +249,6 @@ Plug 'tpope/vim-fugitive'
 " -- show changing on the staging
 Plug 'airblade/vim-gitgutter'
 
-" -- :Ag
-Plug 'rking/ag.vim'
-
 " -- emmet
 Plug 'mattn/emmet-vim'
 let g:user_emmet_install_global = 0
@@ -257,10 +260,13 @@ Plug 'leafgarland/typescript-vim'
 " -- fzf
 Plug 'junegunn/fzf.vim'
 set rtp+=~/.fzf
-let g:fzf_layout = { 'right': '~40%' }
+let g:fzf_layout = { 'up': '~40%' }
 
 " -- :Goyo
 Plug 'junegunn/goyo.vim'
+
+" -- syntax hilight for many programming languages
+Plug 'sheerun/vim-polyglot'
 
 " -- plug end
 call plug#end()
