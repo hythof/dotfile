@@ -44,12 +44,11 @@ ubuntu:
 	make git
 
 install:
-	git pull
 	git submodule init
 	git submodule sync
 	git submodule update
 	cd ~ && ln -sf $(foreach f, $(DOT_FILES), $(DOTFILE_DIR)/$(f)) .
-	yes | submodules/fzf/install
+	yes | .fzf/install
 	mkdir -p ~/tmp
 
 git:

@@ -4,11 +4,13 @@ nnoremap sb :Buffers <cr>
 nnoremap sd :bp <cr> bd # <cr>
 nnoremap se :e %:h/
 nnoremap sf :Files <cr>
-nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sg :Ag <cr>
+nnoremap sh :Helptags <cr>
+nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
-nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+"nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+nnoremap st :Tags <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
-nnoremap sh :split <cr> :Buffer <cr>
 nnoremap sgs :Gstatus <cr>
 nnoremap sgb :Gblame <cr>
 nnoremap sgd :Gdiff <cr>
@@ -142,7 +144,7 @@ au QuickfixCmdPost vimgrep cw
 nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
-set clipboard=unnamedplus
+set clipboard+=unnamed
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
