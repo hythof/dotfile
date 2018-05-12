@@ -49,7 +49,7 @@ install:
 	git submodule sync
 	git submodule update
 	cd ~ && ln -sf $(foreach f, $(DOT_FILES), $(DOTFILE_DIR)/$(f)) .
-	yes | ~/.fzf/install
+	yes | submodules/fzf/install
 	mkdir -p ~/tmp
 
 git:
