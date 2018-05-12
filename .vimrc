@@ -270,6 +270,9 @@ Plug 'junegunn/goyo.vim'
 " -- syntax hilight for many programming languages
 Plug 'sheerun/vim-polyglot'
 
+" -- extend registers
+Plug 'junegunn/vim-peekaboo'
+
 " -- plug end
 call plug#end()
 
