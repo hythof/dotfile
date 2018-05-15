@@ -1,17 +1,20 @@
 " --( customize )-----------------------------------------
 nnoremap s <Nop>
 nnoremap sb :Buffers <cr>
+nnoremap sc :lcd %:h <cr> :pwd <cr>
 nnoremap sd :bp <cr> bd # <cr>
 nnoremap se :e %:h/
 nnoremap sf :Files <cr>
 nnoremap sh :split <cr> :Buffer <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
 nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+nnoremap st :e ~/tmp/workspace <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
 nnoremap sh :split <cr> :Buffer <cr>
-nnoremap sgs :Gstatus <cr>
-nnoremap sgb :Gblame <cr>
-nnoremap sgd :Gdiff <cr>
+nnoremap sgg :Goyo <cr>
+nnoremap sgs :!tig status % <cr><cr>
+nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
+nnoremap sgl :!tig log -- % <cr><cr>
 
 " --( customize )-----------------------------------------
 "au BufRead,BufNewFile *.spa set filetype=spa
@@ -242,9 +245,6 @@ Plug 'janko-m/vim-test'
 
 " -- PureScript
 Plug 'raichoo/purescript-vim'
-
-" -- :Gblame
-Plug 'tpope/vim-fugitive'
 
 " -- show changing on the staging
 Plug 'airblade/vim-gitgutter'
