@@ -5,15 +5,18 @@ nnoremap sc :lcd %:h <cr> :pwd <cr>
 nnoremap sd :bp <cr> bd # <cr>
 nnoremap se :e %:h/
 nnoremap sf :Files <cr>
-nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sg :Ag <cr>
+nnoremap sh :Helptags <cr>
+nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
-nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
-nnoremap st :e ~/tmp/workspace <cr>
+"nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+nnoremap st :Tags <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
 nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
+nnoremap sgd :Gdiff <cr>
 nnoremap sgg :Goyo <cr>
 nnoremap sgs :!tig status % <cr><cr>
-nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
 nnoremap sgl :!tig log -- % <cr><cr>
 
 " --( customize )-----------------------------------------
@@ -145,7 +148,7 @@ au QuickfixCmdPost vimgrep cw
 nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
-set clipboard=unnamedplus
+set clipboard+=unnamed
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
@@ -267,6 +270,9 @@ Plug 'junegunn/goyo.vim'
 
 " -- syntax hilight for many programming languages
 Plug 'sheerun/vim-polyglot'
+
+" -- extend registers
+Plug 'junegunn/vim-peekaboo'
 
 " -- plug end
 call plug#end()
