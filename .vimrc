@@ -13,6 +13,7 @@ nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
 nnoremap st :Tags <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
 nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sgc :BCommit <cr>
 nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
 nnoremap sgd :Gdiff <cr>
 nnoremap sgg :Goyo <cr>
