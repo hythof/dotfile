@@ -11,4 +11,6 @@ git config --global --replace-all color.ui true
 git config --global --replace-all core.excludesfile ~/.gitignore_global
 git config --global --replace-all core.attributesfile ~/.gitattributes_global
 
+(curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim) &
+
 wait
