@@ -149,7 +149,7 @@ au QuickfixCmdPost vimgrep cw
 nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
-set clipboard+=unnamed
+"set clipboard+=unnamed
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
