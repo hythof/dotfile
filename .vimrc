@@ -9,7 +9,7 @@ nnoremap sg :Ag <cr>
 nnoremap sh :Helptags <cr>
 nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
-"nnoremap ss :!tmux send-keys -t '0:0.1' 'C-p' 'C-j' <cr><cr>
+nnoremap ss @:
 nnoremap st :Tags <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
 nnoremap sh :split <cr> :Buffer <cr>
@@ -45,12 +45,12 @@ set formatoptions=q
 "タブの代わりに空白文字を挿入する
 set expandtab
 "タブはスペースx4
-set tabstop=4
+set tabstop=2
 "シフト移動幅
-set shiftwidth=4
+set shiftwidth=2
 "ファイル内の <Tab> が対応する空白の数
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 
