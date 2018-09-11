@@ -98,6 +98,9 @@ set splitright
 " プレビューウィンドウの高さ指定
 set previewheight=20
 
+" Disable netrw
+let g:netrw_dirhistmax=0
+
 "全角スペースを視覚化
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /　/
