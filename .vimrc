@@ -13,6 +13,7 @@ nnoremap ss @:
 nnoremap st :Tags <cr>
 nnoremap sv :vsplit <cr> :Buffer <cr>
 nnoremap sh :split <cr> :Buffer <cr>
+nnoremap sgc :BCommit <cr>
 nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
 nnoremap sgd :Gdiff <cr>
 nnoremap sgg :Goyo <cr>
@@ -97,6 +98,9 @@ set splitright
 " プレビューウィンドウの高さ指定
 set previewheight=20
 
+" Disable netrw
+let g:netrw_dirhistmax=0
+
 "全角スペースを視覚化
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /　/
@@ -148,7 +152,7 @@ au QuickfixCmdPost vimgrep cw
 nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
-set clipboard+=unnamed
+"set clipboard+=unnamed
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
