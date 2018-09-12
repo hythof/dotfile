@@ -8,7 +8,7 @@ alias -g L="| less"
 alias -g G="| grep"
 alias l="ls -vGlhF"
 alias ll="ls -vaGlhF"
-alias h="history -i"
+alias h="history -ir | uniq -f 4"
 alias a="ag --ignore node_modules --ignore vendor --ignore '*.min.*'"
 alias gp="git pull"
 alias ga="git add"
@@ -97,11 +97,12 @@ HISTFILE=$HOME/.zsh-history     # 履歴をファイルに保存する
 HISTSIZE=10000                  # メモリ内の履歴の数
 SAVEHIST=10000                  # 保存される履歴の数
 setopt extended_history         # 履歴ファイルに時刻を記録
-#setopt share_history            # 履歴の共有
+setopt share_history            # 履歴の共有
+setopt append_history           # 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
+#setopt hist_no_store            # history (fc -l) コマンドをヒストリリストから取り除く。
 bindkey -e                      # emacsライクなキーバインド
 autoload -U compinit; compinit  # 入力補助
 setopt nolistbeep               # 補完時にビープ音を鳴らさない
-setopt append_history           # 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
 setopt auto_cd                  # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
 setopt auto_list                # 補完候補が複数ある時に、一覧表示する
 setopt auto_menu                # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完する
@@ -129,7 +130,6 @@ setopt numeric_glob_sort        # ファイル名の展開で、辞書順では�
 setopt print_eightbit           # 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
 setopt short_loops              # for, repeat, select, if, function などで簡略文法が使えるようになる
 setopt prompt_subst             # 色を使う
-setopt hist_no_store            # history (fc -l) コマンドをヒストリリストから取り除く。
 unsetopt promptcr               # 文字列末尾に改行コードが無い場合でも表示する
 setopt transient_rprompt        #コピペの時rpromptを非表示する
 setopt autopushd                # cd -[tab] でpushd

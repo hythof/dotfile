@@ -44,7 +44,7 @@ html5tidy:
 
 ubuntu-init:
 	sudo apt update && sudo apt upgrade -y
-	sudo apt purge -y nano firefox ubuntu-web-launchers
+	sudo apt purge -y nano firefox ubuntu-web-launchers "*libreoffice*"
 	sudo apt install -y vim-nox zsh git tig silversearcher-ag atop iotop mercurial tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv virtualenvwrapper docker.io
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
