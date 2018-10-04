@@ -10,6 +10,7 @@ alias l="ls -vGlhF"
 alias ll="ls -vaGlhF"
 alias h="history -ir | uniq -f 4"
 alias a="ag --ignore node_modules --ignore vendor --ignore '*.min.*'"
+alias au="sudo apt update && sudo apt upgrade"
 alias gp="git pull"
 alias ga="git add"
 alias gb="git branch"
@@ -48,6 +49,12 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 
+# --( SSH )-----------------------------------------------
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
+
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '%b '
@@ -76,15 +83,12 @@ function git-branch {
 autoload colors
 colors
 case "$TERM" in
-xterm*|kterm*|rxvt*|screen)
-    PROMPT='%{${fg[green]}%}| %{${reset_color}%}'
-    #PROMPT="%{${fg[green]}%}%n@%m%%%{${reset_color}%} "
+xterm*|kterm*|rxvt*|screen*)
+    PROMPT=$'%{${fg[green]}%}| %{${reset_color}%}'
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-        PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
+        PROMPT=$'%{${fg[white]}%}${HOST%%.*}| %{${reset_color}%}'
     setopt prompt_subst
-    RPROMPT='%{${fg[green]}%}%~ %1v%{${reset_color}%}'
-    #RPROMPT='[%1(v|%F{green}%1v%f|)%{${fg[green]}%}%~%{${reset_color}%}]'
-    #RPROMPT="[%{${fg[green]}%}%~%{${reset_color}%}]"
+    RPROMPT=$'%{${fg[green]}%}%~ %1v%{${reset_color}%}'
     ;;
 *)
     PROMPT='%m:%c%# '
@@ -149,7 +153,7 @@ setopt print_exit_value        # 戻り値が 0 以外の場合終了コード�
 setopt pushd_ignore_dups       # ディレクトリスタックに同じディレクトリを追加しないようになる
 #setopt pushd_to_home           # pushd を引数なしで実行した場合 pushd $HOME と見なされる
 #setopt rm_star_silent          # rm * などの際、本当に全てのファイルを消して良いかの確認しないようになる
-setopt rm_star_wait            # rm_star_silent の逆で、10 秒間反応しなくなり、頭を冷ます時間が与えられる
+#setopt rm_star_wait            # rm_star_silent の逆で、10 秒間反応しなくなり、頭を冷ます時間が与えられる
 # 補完候補をカラーリング
 #eval `dircolors`
 export ZLS_COLORS=$LS_COLORS

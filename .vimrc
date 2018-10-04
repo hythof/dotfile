@@ -45,7 +45,7 @@ set formatoptions=q
 
 "タブの代わりに空白文字を挿入する
 set expandtab
-"タブはスペースx4
+"タブはスペースx2
 set tabstop=2
 "シフト移動幅
 set shiftwidth=2
@@ -287,6 +287,5 @@ filetype plugin indent on  " required
 
 " 環境依存
 if filereadable(expand('~/.vimrc.local'))
-  " :command! ProjectName lcd /path/to/project | :Files
   source ~/.vimrc.local
 endif
