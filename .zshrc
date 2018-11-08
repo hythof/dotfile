@@ -50,10 +50,13 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 
 # --( SSH )-----------------------------------------------
-if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
-    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
-fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+function ssh-add-permanent {
+  pkill ssh-agent
+  eval `ssh-agent`
+  ssh-add
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+}
 
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info

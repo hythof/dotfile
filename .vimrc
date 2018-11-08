@@ -256,10 +256,15 @@ Plug 'raichoo/purescript-vim'
 " -- show changing on the staging
 Plug 'airblade/vim-gitgutter'
 
+" -- vue
+Plug 'posva/vim-vue'
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
 " -- emmet
 Plug 'mattn/emmet-vim'
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,vue EmmetInstall
 
 " -- Type Script
 Plug 'leafgarland/typescript-vim'
