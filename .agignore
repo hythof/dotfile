@@ -1,0 +1,7 @@
+tmp
+.git
+.svn
+node_modules
+*.js.map
+*.svg
+yarn.lock

@@ -1,4 +1,4 @@
-DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global .fzf
+DOT_FILES = .ctags .emacs .vim .vimrc .zshrc .tmux.conf .cvsrc .gitignore_global .gitattributes_global .fzf .agignore
 DOTFILE_DIR = $(shell pwd)
 
 help:

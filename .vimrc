@@ -2,23 +2,15 @@
 nnoremap s <Nop>
 nnoremap sb :Buffers <cr>
 nnoremap sc :lcd %:h <cr> :pwd <cr>
-nnoremap sd :bp <cr> bd # <cr>
+nnoremap sd :bd <cr>
 nnoremap se :e %:h/
 nnoremap sf :Files <cr>
-nnoremap sg :Ag <cr>
+nnoremap sa :Ag <cr>
 nnoremap sh :Helptags <cr>
 nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
-nnoremap ss @:
 nnoremap st :Tags <cr>
-nnoremap sv :vsplit <cr> :Buffer <cr>
-nnoremap sh :split <cr> :Buffer <cr>
-nnoremap sgc :BCommit <cr>
-nnoremap sgb :!tig blame +<slnum> -C % " <cr><cr>
-nnoremap sgd :Gdiff <cr>
-nnoremap sgg :Goyo <cr>
-nnoremap sgs :!tig status % <cr><cr>
-nnoremap sgl :!tig log -- % <cr><cr>
+nnoremap ss :!tig status <cr><cr>
 
 " --( customize )-----------------------------------------
 "au BufRead,BufNewFile *.spa set filetype=spa
@@ -273,9 +265,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'junegunn/fzf.vim'
 set rtp+=~/.fzf
 let g:fzf_layout = { 'up': '~40%' }
-
-" -- :Goyo
-Plug 'junegunn/goyo.vim'
 
 " -- syntax hilight for many programming languages
 Plug 'sheerun/vim-polyglot'
