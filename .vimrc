@@ -2,15 +2,18 @@
 nnoremap s <Nop>
 nnoremap sb :Buffers <cr>
 nnoremap sc :lcd %:h <cr> :pwd <cr>
-nnoremap sd :bd <cr>
 nnoremap se :e %:h/
 nnoremap sf :Files <cr>
-nnoremap sa :Ag <cr>
-nnoremap sh :Helptags <cr>
+nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
 nnoremap st :Tags <cr>
-nnoremap ss :!tig status <cr><cr>
+nnoremap ss :e # <cr>
+nnoremap sg <Nop>
+nnoremap sgs :!tig status <cr><cr>
+nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
+"nnoremap sh :!tig blame % <cr><cr>
+"nnoremap sh :Helptags <cr>
 
 " --( customize )-----------------------------------------
 "au BufRead,BufNewFile *.spa set filetype=spa
