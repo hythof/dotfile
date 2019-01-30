@@ -2,4 +2,3 @@ set main-view = id date author commit-title:graph=yes,refs=yes
 set blame-view = date:custom id:yes,color author:email-user,width=12 line-number:yes,interval=1 text
 set blame-view-date-format = "%Y-%m-%d"
 set line-graphics = utf-8
-set diff-highlight = true

@@ -10,10 +10,14 @@ nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
 nnoremap st :Tags <cr>
 nnoremap ss :e # <cr>
 nnoremap sg <Nop>
-nnoremap sgs :!tig status <cr><cr>
+nnoremap sh :Helptags <cr>
+nnoremap sgm :!tig main <cr><cr>
+nnoremap sgl :!tig log <cr><cr>
+nnoremap sgt :!tig tree <cr><cr>
 nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
-"nnoremap sh :!tig blame % <cr><cr>
-"nnoremap sh :Helptags <cr>
+nnoremap sgr :!tig refs <cr><cr>
+nnoremap sgs :!tig status <cr><cr>
+nnoremap sgh :!tig help <cr><cr>
 
 " --( customize )-----------------------------------------
 "au BufRead,BufNewFile *.spa set filetype=spa
