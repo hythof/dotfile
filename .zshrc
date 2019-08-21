@@ -1,5 +1,5 @@
 # ---( util )--------------------------------------------------
-alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(64) }.pack(%q!C*!).tr(%Q!\x00-\x40!, %q!A-Za-z0-9_-!)'"
+alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(63) }.pack(%q!C*!).tr(%Q!\x00-\x3f!, %q!A-Za-z0-9_!)'"
 alias psh="ruby -e 'cmd=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!ssh -t #{x} \"#{cmd}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
 alias pput="ruby -e 'from=ARGV.shift; to=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!scp -r #{from} #{x}:\"#{to}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
 
