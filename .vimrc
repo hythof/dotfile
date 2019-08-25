@@ -16,13 +16,13 @@ nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
 "nnoremap sh :Helptags <cr>
 
 " --( customize )-----------------------------------------
-"au BufRead,BufNewFile *.spa set filetype=spa
-"au BufRead,BufNewFile *.vl set filetype=vl
-"set rtp+=/home/hiroshi/git/spa/misc/vim/
-"exe 'set runtimepath+=/home/hiroshi/git/spa/misc/vim/'
-"au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
-"exe 'set runtimepath+=/home/hiroshi/git/ocean/design_doc/vl/misc/vim/'
-"au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
+au BufRead,BufNewFile *.spa set filetype=spa
+au BufRead,BufNewFile *.vl set filetype=vl
+set rtp+=/home/hiroshi/git/spa/misc/vim/
+exe 'set runtimepath+=~/git/spa/misc/vim/'
+au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
+exe 'set runtimepath+=~/git/vl/misc/vim/'
+au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -236,6 +236,9 @@ let g:go_fmt_command = "goimports"
 " -- Erlang
 Plug 'vim-erlang/vim-erlang-tags'
 :set runtimepath^=~/.vim/bundle/vim-erlang-tags/
+
+" -- PHP
+autocmd FileType php setlocal expandtab shiftwidth=4 tabstop=4
 
 " -- Ruby
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
