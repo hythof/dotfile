@@ -1,5 +1,5 @@
 # ---( toys )--------------------------------------------------
-alias trend="curl -s -H \"Accept: application/vnd.github.mercy-preview+json\" \"https://api.github.com/search/repositories?q=stars:%3E1&s=stars&type=Repositories\" | jq -r '.items[] | \"\(.stargazers_count|tostring)|\(.language)|\(.name)|\(.description[:50])...\"' | column -s='|' -t"
+alias trend="curl -s -H \"Accept: application/vnd.github.mercy-preview+json\" \"https://api.github.com/search/repositories?q=stars:%3E1&s=stars&type=Repositories\" | jq -r '.items[] | \"\(.stargazers_count|tostring)|\(.language)|\(.name)|\(.description[:50])...\"' | column -s='|' -t | cat -n"
 
 # ---( util )--------------------------------------------------
 alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(63) }.pack(%q!C*!).tr(%Q!\x00-\x3f!, %q!A-Za-z0-9_!)'"
