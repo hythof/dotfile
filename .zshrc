@@ -168,6 +168,9 @@ autoload -Uz compinit; compinit # 補完の利用設定
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=1
 
+# ---( docker )------------------------------------------------
+alias docker-rm-all='docker rm $(docker ps -a -q)'
+
 # --( 環境依存 )-----------------------------------------------
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

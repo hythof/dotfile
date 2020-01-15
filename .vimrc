@@ -22,11 +22,14 @@ nnoremap sgh :!tig help <cr><cr>
 " --( customize )-----------------------------------------
 au BufRead,BufNewFile *.spa set filetype=spa
 au BufRead,BufNewFile *.vl set filetype=vl
+au BufRead,BufNewFile *.moa set filetype=moa
 set rtp+=/home/hiroshi/git/spa/misc/vim/
 exe 'set runtimepath+=~/git/spa/misc/vim/'
 au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
 exe 'set runtimepath+=~/git/vl/misc/vim/'
 au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
+exe 'set runtimepath+=~/git/moa/misc/vim/'
+au! BufRead,BufNewFile *.moa setlocal filetype=moa fileencoding=utf-8 fileformat=unix
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
@@ -46,11 +49,9 @@ set formatoptions=q
 set expandtab
 "タブはスペースx2
 set tabstop=2
+set softtabstop=2
 "シフト移動幅
 set shiftwidth=2
-"ファイル内の <Tab> が対応する空白の数
-set tabstop=2
-set softtabstop=2
 "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 
