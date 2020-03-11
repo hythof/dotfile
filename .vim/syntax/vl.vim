@@ -1,1 +1,0 @@
-/home/hiroshi/git/vl/misc/vim/syntax/vl.vim
