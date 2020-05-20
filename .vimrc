@@ -11,6 +11,7 @@ nnoremap st :Tags <cr>
 nnoremap ss :e # <cr>
 nnoremap sg <Nop>
 nnoremap sh :Helptags <cr>
+nnoremap sd q:k<Cr>
 nnoremap sgm :!tig main <cr><cr>
 nnoremap sgl :!tig log <cr><cr>
 nnoremap sgt :!tig tree <cr><cr>
@@ -273,6 +274,7 @@ autocmd FileType html,css,vue EmmetInstall
 Plug 'leafgarland/typescript-vim'
 
 " -- fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 set rtp+=~/.fzf
 let g:fzf_layout = { 'up': '~40%' }
