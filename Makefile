@@ -8,12 +8,17 @@ help:
 	@echo "make git       # set git global config"
 	@echo "make clean     # rm all"
 	@echo "make ubuntu    # install for desktop"
+	@echo "make mac       # install for mac"
 
 ubuntu:
 	make ubuntu-init
 	make ubuntu-font
 	make install
 	make git
+
+mac:
+	brew install ghc tig the_silver_searcher tmux node go rust llvm ctags tree gnupg pinentry pinentry-mac jq
+	brew cask install virtualbox
 
 install:
 	git submodule init
