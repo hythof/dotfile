@@ -1,0 +1,32 @@
+#!ruby
+
+require 'net/http'
+
+def main(url)
+  unless url
+    puts 'Usage:'
+    puts '  atc https://atcoder.jp/...'
+    return
+  end
+  body = Net::HTTP.get(URI(url))
+  body = body.force_encoding('utf-8')
+  samples = body.scan(%r!<h3>入力例.*?</h3><pre>(.+?)</pre>!m)
+  samples.each_with_index do |sample, n|
+    File.open((n+1).to_s, 'w') do |fh|
+      fh.print(sample[0].strip().gsub(/\r/, ''))
+    end
+  end
+  file = url.split('/')[-1] + '.py'
+  File.open('Makefile', 'w') do |fh|
+    fh.puts('all:')
+    samples.size.times do |n|
+      fh.puts("\tpypy3 " + file + ' < ' + (n+1).to_s)
+    end
+  end
+  File.open(file, 'w') do |fh|
+    fh.puts('n,*a = [int(x) for x in open(0).read().split()]')
+  end
+  puts('vi ' + file)
+end
+
+main(ARGV[0])

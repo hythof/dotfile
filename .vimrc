@@ -6,7 +6,7 @@ nnoremap se :e %:h/
 nnoremap sf :Files <cr>
 nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
-nnoremap sr :source ~/.vimrc <cr>:e ~/.vimrc <cr>
+nnoremap sr :source ~/.vimrc <cr>:e! <cr>
 nnoremap st :Tags <cr>
 nnoremap ss :e # <cr>
 nnoremap sg <Nop>
@@ -19,6 +19,9 @@ nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
 nnoremap sgr :!tig refs <cr><cr>
 nnoremap sgs :!tig status <cr><cr>
 nnoremap sgh :!tig help <cr><cr>
+nnoremap sp :setlocal spell spelllang=en <cr>
+nnoremap sn :setlocal nospell <cr>
+inoremap <C-e> if err != nil { return nil, err }<cr>
 
 " --( customize )-----------------------------------------
 au BufRead,BufNewFile *.spa set filetype=spa
@@ -201,7 +204,7 @@ call plug#begin('~/.vim/plugged')
 " -- haskell
 Plug 'kana/vim-filetype-haskell'
 Plug 'Twinside/vim-hoogle'
-Plug 'nbouscal/vim-stylish-haskell'
+"Plug 'nbouscal/vim-stylish-haskell'
 
 " -- python
 Plug 'klen/python-mode'

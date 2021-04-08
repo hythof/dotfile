@@ -33,7 +33,7 @@ export GIT_AUTHOR_NAME=`whoami`
 export GIT_COMMITTER_NAME=`whoami`
 
 # shell path
-export PATH=/usr/sbin:/usr/local/sbin:$PATH
+export PATH=/usr/sbin:/usr/local/sbin:$HOME/git/dotfile/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=$HOME/.goenv/bin:$PATH
