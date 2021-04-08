@@ -9,7 +9,7 @@ nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e! <cr>
 nnoremap st :Tags <cr>
 nnoremap ss :e # <cr>
-nnoremap sg <Nop>
+nnoremap sg :%s/></>\r</g <cr>gg=G
 nnoremap sh :Helptags <cr>
 nnoremap sd q:k<Cr>
 nnoremap sgm :!tig main <cr><cr>
