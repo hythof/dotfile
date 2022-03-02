@@ -21,8 +21,7 @@ nnoremap sgs :!tig status <cr><cr>
 nnoremap sgh :!tig help <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
-nnoremap [ :N <cr>
-nnoremap ] :n <cr>
+nnoremap sv :e ~/.vimrc <cr>
 inoremap <C-e> if err != nil { return nil, err }<cr>
 
 " --( customize )-----------------------------------------
