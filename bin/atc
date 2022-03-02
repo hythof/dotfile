@@ -24,7 +24,7 @@ def main(url)
     end
   end
   File.open(file, 'w') do |fh|
-    fh.puts('n,*a = [int(x) for x in open(0).read().split()]')
+    fh.puts('')
   end
   puts('vi ' + file)
 end

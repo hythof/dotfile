@@ -2,6 +2,7 @@
 alias trend="curl -s -H \"Accept: application/vnd.github.mercy-preview+json\" \"https://api.github.com/search/repositories?q=stars:%3E1&s=stars&type=Repositories\" | jq -r '.items[] | \"\(.stargazers_count|tostring)|\(.language)|\(.name)|\(.description[:50])...\"' | column -s='|' -t | cat -n"
 
 # ---( util )--------------------------------------------------
+alias m=make
 alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(63) }.pack(%q!C*!).tr(%Q!\x00-\x3f!, %q!A-Za-z0-9_!)'"
 alias psh="ruby -e 'cmd=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!ssh -t #{x} \"#{cmd}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
 alias pput="ruby -e 'from=ARGV.shift; to=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!scp -r #{from} #{x}:\"#{to}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
@@ -15,6 +16,7 @@ alias h="history -ir | uniq -f 4"
 alias ag="ag -W 90"
 alias au="sudo apt update && sudo apt upgrade"
 alias gp="git pull"
+alias gf="git fetch --prune"
 alias ga="git add"
 alias gb="git branch"
 alias gd="git diff"
@@ -40,6 +42,7 @@ export PATH=$HOME/.goenv/bin:$PATH
 export PATH=$HOME/.goenv/shims:$PATH
 export PATH=$HOME/.vim/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/git/moa/bin:$PATH
 export EDITOR=vi
 export SHELL=`which zsh`
 
@@ -177,3 +180,5 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
