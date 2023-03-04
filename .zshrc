@@ -46,6 +46,9 @@ export PATH=$HOME/git/moa/bin:$PATH
 export EDITOR=vi
 export SHELL=`which zsh`
 
+# for gpg+vim
+export GPG_TTY=$(tty)
+
 # for pager
 export LESSCHARSET=utf-8
 
