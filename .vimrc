@@ -129,6 +129,9 @@ set backupdir=~/tmp
 ":set cursorline
 ":set cursorcolumn
 
+" turn off beep sound
+set belloff=all
+
 " ステータス行
 highlight StatusLine ctermbg=gray ctermfg=black
 set laststatus=2

@@ -43,6 +43,7 @@ export PATH=$HOME/.goenv/shims:$PATH
 export PATH=$HOME/.vim/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/git/moa/bin:$PATH
+export PATH=/opt/homebrew/opt/llvm/bin:$PATH
 export EDITOR=vi
 export SHELL=`which zsh`
 
