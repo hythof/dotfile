@@ -2,13 +2,14 @@
 nnoremap s <Nop>
 nnoremap sb :Buffers <cr>
 nnoremap sc :lcd %:h <cr> :pwd <cr>
+nnoremap ss :e # <cr>
 nnoremap se :e %:h/
+nnoremap sv :e ~/.vimrc <cr>
 nnoremap sf :Files <cr>
 nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
-nnoremap sr :source ~/.vimrc <cr>:e! <cr>
+nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
-nnoremap ss :e # <cr>
 nnoremap sg :%s/></>\r</g <cr>gg=G
 nnoremap sh :Helptags <cr>
 nnoremap sd q:k<Cr>
@@ -21,8 +22,6 @@ nnoremap sgs :!tig status <cr><cr>
 nnoremap sgh :!tig help <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
-nnoremap sv :e ~/.vimrc <cr>
-inoremap <C-e> if err != nil { return nil, err }<cr>
 
 " --( customize )-----------------------------------------
 au BufRead,BufNewFile *.spa set filetype=spa
