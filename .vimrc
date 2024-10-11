@@ -1,7 +1,6 @@
 " --( customize )-----------------------------------------
 nnoremap s <Nop>
 nnoremap sb :Buffers <cr>
-nnoremap sc :lcd %:h <cr> :pwd <cr>
 nnoremap ss :e # <cr>
 nnoremap se :e %:h/
 nnoremap sv :e ~/.vimrc <cr>
@@ -10,28 +9,18 @@ nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
-nnoremap sg :%s/></>\r</g <cr>gg=G
+"nnoremap sg :%s/></>\r</g <cr>gg=G
 nnoremap sh :Helptags <cr>
-nnoremap sd q:k<Cr>
-nnoremap sgm :!tig main <cr><cr>
-nnoremap sgl :!tig log <cr><cr>
-nnoremap sgt :!tig tree <cr><cr>
-nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<CR> %<CR>:redraw!<CR>
+nnoremap sgm :!tig main % <cr><cr>
+nnoremap sgl :!tig log % <cr><cr>
+nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
 nnoremap sgr :!tig refs <cr><cr>
 nnoremap sgs :!tig status <cr><cr>
-nnoremap sgh :!tig help <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
 
 " --( customize )-----------------------------------------
-au BufRead,BufNewFile *.spa set filetype=spa
-au BufRead,BufNewFile *.vl set filetype=vl
 au BufRead,BufNewFile *.moa set filetype=moa
-set rtp+=/home/hiroshi/git/spa/misc/vim/
-exe 'set runtimepath+=~/git/spa/misc/vim/'
-au! BufRead,BufNewFile *.spa setlocal filetype=spa fileencoding=utf-8 fileformat=unix
-exe 'set runtimepath+=~/git/vl/misc/vim/'
-au! BufRead,BufNewFile *.vl setlocal filetype=vl fileencoding=utf-8 fileformat=unix
 exe 'set runtimepath+=~/git/moa/misc/vim/'
 au! BufRead,BufNewFile *.moa setlocal filetype=moa fileencoding=utf-8 fileformat=unix
 
@@ -155,8 +144,8 @@ let $PATH = $PATH . ':~/.vim/bin'
 "augroup END
 
 " vimgrepを使いやすく
-au QuickfixCmdPost vimgrep cw
-nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+"au QuickfixCmdPost vimgrep cw
+"nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
 "set clipboard+=unnamed
@@ -224,9 +213,6 @@ let g:pymode_rope_lookup_project = 0
 Plug 'bronson/vim-trailing-whitespace'
 let g:extra_whitespace_ignored_filetypes = ['markdown']
 
-" -- coffee script
-Plug 'kchmck/vim-coffee-script'
-
 " -- go
 Plug 'fatih/vim-go'
 let g:go_fmt_fail_silently = 0
@@ -260,9 +246,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
 
-" -- PureScript
-Plug 'raichoo/purescript-vim'
-
 " -- show changing on the staging
 Plug 'airblade/vim-gitgutter'
 
@@ -280,10 +263,10 @@ autocmd FileType html,css,vue EmmetInstall
 Plug 'leafgarland/typescript-vim'
 
 " -- fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-set rtp+=~/.fzf
-let g:fzf_layout = { 'up': '~40%' }
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"set rtp+=~/.fzf
+"let g:fzf_layout = { 'up': '~40%' }
 
 " -- syntax hilight for many programming languages
 Plug 'sheerun/vim-polyglot'
