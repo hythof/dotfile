@@ -263,10 +263,10 @@ autocmd FileType html,css,vue EmmetInstall
 Plug 'leafgarland/typescript-vim'
 
 " -- fzf
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-"set rtp+=~/.fzf
-"let g:fzf_layout = { 'up': '~40%' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+set rtp+=~/.fzf
+let g:fzf_layout = { 'up': '~40%' }
 
 " -- syntax hilight for many programming languages
 Plug 'sheerun/vim-polyglot'
