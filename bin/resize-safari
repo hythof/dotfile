@@ -1,0 +1,5 @@
+osascript \
+-e 'tell application "Safari"' \
+-e '  set the bounds of the first window to {100, 100, 660, 407}' \
+-e '  activate' \
+-e 'end tell'

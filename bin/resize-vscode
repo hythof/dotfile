@@ -1,0 +1,8 @@
+osascript \
+-e 'tell application "System Events" to tell process "Electron"' \
+-e '  tell window 1' \
+-e '    set size to {660, 407}' \
+-e '    set position to {100, 100}' \
+-e '  end tell' \
+-e '  activate' \
+-e 'end tell'

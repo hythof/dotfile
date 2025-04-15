@@ -149,6 +149,7 @@ let $PATH = $PATH . ':~/.vim/bin'
 
 " sync clipboard
 "set clipboard+=unnamed
+vnoremap <leader>y "vy:call system('pbcopy', getreg('v'))<CR>
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"
@@ -257,6 +258,25 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " -- emmet
 Plug 'mattn/emmet-vim'
 let g:user_emmet_install_global = 0
+let g:user_emmet_settings = {
+\  'html': {
+\    'default_attributes': {
+\      'textarea': {},
+\    },
+\    'snippets': {
+\      'html': "<!document html>\n"
+\              ."<html>\n"
+\              ."<head>\n"
+\              ."<meta charset=utf-8>\n"
+\              ."<title></title>\n"
+\              ."<meta name=viewport content=width=device-width,initial-scale=1.0>\n"
+\              ."</head>\n"
+\              ."<body>\n\t${child}|\n</body>\n"
+\              ."</html>",
+\      'textarea': "<textarea>${child}|</textarea>"
+\    },
+\  },
+\}
 autocmd FileType html,css,vue EmmetInstall
 
 " -- Type Script
