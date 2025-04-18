@@ -148,8 +148,8 @@ let $PATH = $PATH . ':~/.vim/bin'
 "nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
-"set clipboard+=unnamed
-vnoremap <leader>y "vy:call system('pbcopy', getreg('v'))<CR>
+set clipboard=
+vnoremap <leader>y "+y
 
 " --( changelog )-----------------------------------------
 let g:changelog_username = "Hiroshi"

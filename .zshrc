@@ -25,9 +25,14 @@ alias gdn="git diff --name-only"
 alias gs="git status --short --branch"
 alias gc="git checkout"
 alias gca="git commit -a"
+alias gr="git reset"
 alias gsu="git submodule update -i"
 alias gl="git log --no-merges --oneline"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
+function ww {
+    grep "$*" /usr/share/dict/words | wc -l
+    grep "$*" /usr/share/dict/words | head -n 7
+}
 
 # ---( export )-------------------------------------------------
 # git
@@ -187,3 +192,19 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# bun completions
+[ -s "/Users/hiroshi/.bun/_bun" ] && source "/Users/hiroshi/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/Users/hiroshi/.opam/opam-init/init.zsh' ]] || source '/Users/hiroshi/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
