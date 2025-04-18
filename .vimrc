@@ -9,7 +9,6 @@ nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
 nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
-"nnoremap sg :%s/></>\r</g <cr>gg=G
 nnoremap sh :Helptags <cr>
 nnoremap sgm :!tig main % <cr><cr>
 nnoremap sgl :!tig log % <cr><cr>
@@ -100,7 +99,6 @@ au BufNewFile,BufRead * match ZenkakuSpace /　/
 
 " 日本語の設定
 set termencoding=utf-8
-"set encoding=japan
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 
@@ -131,21 +129,6 @@ set statusline+=%{'['.&fileformat.']'}
 
 " vimpath
 let $PATH = $PATH . ':~/.vim/bin'
-
-"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
-"augroup BinaryXXD
-"  autocmd!
-"  autocmd BufReadPre  *.bin let &binary =1
-"  autocmd BufReadPost * if &binary | silent %!xxd -g 1
-"  autocmd BufReadPost * set ft=xxd | endif
-"  autocmd BufWritePre * if &binary | "%!xxd -r" | endif
-"  autocmd BufWritePost * if &binary | silent %!xxd -g 1
-"  autocmd BufWritePost * set nomod | endif
-"augroup END
-
-" vimgrepを使いやすく
-"au QuickfixCmdPost vimgrep cw
-"nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 
 " sync clipboard
 set clipboard=
