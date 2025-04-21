@@ -17,7 +17,8 @@ ubuntu:
 	make git
 
 mac:
-	brew install ghc tig the_silver_searcher tmux node go rust llvm ctags tree gnupg pinentry pinentry-mac jq
+	brew install ghc tig the_silver_searcher go rust llvm ctags tree gnupg pinentry pinentry-mac jq ncdu
+	curl https://get.volta.sh | bash
 
 install:
 	git submodule init
