@@ -7,14 +7,15 @@ nnoremap sv :e ~/.vimrc <cr>
 nnoremap sf :Files <cr>
 nnoremap sa :Ag! <cr>
 nnoremap sl :BLines <cr>
+nnoremap sm :Marks <cr>
 nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
 nnoremap sh :Helptags <cr>
-nnoremap sgm :!tig main % <cr><cr>
-nnoremap sgl :!tig log % <cr><cr>
-nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
-nnoremap sgr :!tig refs <cr><cr>
-nnoremap sgs :!tig status <cr><cr>
+"nnoremap sgm :!tig main % <cr><cr>
+"nnoremap sgl :!tig log % <cr><cr>
+"nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
+"nnoremap sgr :!tig refs <cr><cr>
+"nnoremap sgs :!tig status <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
 
@@ -30,7 +31,7 @@ set autoindent
 "半角文字対応
 set ambiwidth=double
 
-"Vi互換をオフ
+"vi互換をオフ
 set nocompatible
 
 "自動改行をOff
@@ -100,7 +101,7 @@ au BufNewFile,BufRead * match ZenkakuSpace /　/
 " 日本語の設定
 set termencoding=utf-8
 set encoding=utf-8
-set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
+"set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 
 " 改行コードの優先順位
 set fileformats=unix,dos,mac
@@ -216,27 +217,27 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
 " -- Erlang
-Plug 'vim-erlang/vim-erlang-tags'
-:set runtimepath^=~/.vim/bundle/vim-erlang-tags/
+"Plug 'vim-erlang/vim-erlang-tags'
+":set runtimepath^=~/.vim/bundle/vim-erlang-tags/
 
 " -- PHP
-autocmd FileType php setlocal expandtab shiftwidth=4 tabstop=4
+"autocmd FileType php setlocal expandtab shiftwidth=4 tabstop=4
 
 " -- Ruby
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 
 " -- Rails
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
-Plug 'janko-m/vim-test'
+"Plug 'tpope/vim-rails'
+"Plug 'tpope/vim-bundler'
+"Plug 'janko-m/vim-test'
 
 " -- show changing on the staging
 Plug 'airblade/vim-gitgutter'
 
 " -- vue
-Plug 'posva/vim-vue'
-autocmd FileType vue syntax sync fromstart
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+"Plug 'posva/vim-vue'
+"autocmd FileType vue syntax sync fromstart
+"autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " -- emmet
 Plug 'mattn/emmet-vim'

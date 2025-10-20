@@ -183,8 +183,9 @@ autoload -Uz compinit; compinit # 補完の利用設定
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=1
 
-# ---( docker )------------------------------------------------
+# ---( docker with lima )--------------------------------------
 alias docker-rm-all='docker rm $(docker ps -a -q)'
+export DOCKER_HOST=unix://$HOME/.lima/docker/sock/docker.sock
 
 # --( 環境依存 )-----------------------------------------------
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
