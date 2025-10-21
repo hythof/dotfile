@@ -1,8 +1,10 @@
 *~
 .DS_Store
 tags
-.tags
 tags.meta
+.tags
+.idea
+.claude
 *.o
 *.lo
 *.la
