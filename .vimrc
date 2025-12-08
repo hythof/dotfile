@@ -11,6 +11,7 @@ nnoremap sm :Marks <cr>
 nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
 nnoremap sh :Helptags <cr>
+"nnoremap sz :botright terminal ++rows=5 ++close <cr> make <cr>
 "nnoremap sgm :!tig main % <cr><cr>
 "nnoremap sgl :!tig log % <cr><cr>
 "nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
@@ -18,6 +19,7 @@ nnoremap sh :Helptags <cr>
 "nnoremap sgs :!tig status <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
+nnoremap sd :terminal ++close ++curwin zsh -c "git diff --exit-code \|\| { printf \"commit message: \"; read msg; [[ -n $msg ]] && git add -A && git commit -F - <<<\"\$msg\" && git push }" <cr>
 
 " --( customize )-----------------------------------------
 au BufRead,BufNewFile *.moa set filetype=moa
