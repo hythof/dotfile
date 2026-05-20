@@ -4,12 +4,10 @@ alias trend="curl -s -H \"Accept: application/vnd.github.mercy-preview+json\" \"
 # ---( util )--------------------------------------------------
 alias m="make"
 alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(63) }.pack(%q!C*!).tr(%Q!\x00-\x3f!, %q!A-Za-z0-9_!)'"
-alias psh="ruby -e 'cmd=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!ssh -t #{x} \"#{cmd}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
-alias pput="ruby -e 'from=ARGV.shift; to=ARGV.shift; r={}; ARGV.map{|x| Thread.start{ r[%Q!# #{x}!] = IO.popen(%Q!scp -r #{from} #{x}:\"#{to}\"!, :err => [:child, :out]){|io| io.read} }}.map(&:join); system %q!reset!; puts r.sort'"
 
 # ---( alias )-------------------------------------------------
-alias -g L="| less"
-alias -g G="| grep"
+#alias -g L="| less"
+#alias -g G="| grep"
 alias l="ls -vGlhF"
 alias ll="ls -vaGlhF"
 alias h="history -ir | uniq -f 4"
@@ -26,12 +24,14 @@ alias gs="git status --short --branch"
 alias gc="git checkout"
 alias gca="git commit -a"
 alias gr="git reset"
-alias gsu="git submodule update -i"
-alias gl="git log --no-merges --oneline"
+#alias gsu="git submodule update -i"
+alias gl="git log --no-merges --pretty=format:'%h %ad %Cgreen(%an)%Creset %s' --date=short"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
 function ww {
-    grep "$*" /usr/share/dict/words | wc -l
-    grep "$*" /usr/share/dict/words | head -n 7
+    (
+        grep "$*" /usr/share/dict/words | wc -l
+        grep "$*" /usr/share/dict/words
+    ) | less -F
 }
 
 # ---( export )-------------------------------------------------
@@ -43,8 +43,6 @@ export GIT_COMMITTER_NAME=`whoami`
 export PATH=/usr/sbin:/usr/local/sbin:$HOME/git/dotfile/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/.rbenv/shims:$PATH
-export PATH=$HOME/.goenv/bin:$PATH
-export PATH=$HOME/.goenv/shims:$PATH
 export PATH=$HOME/.vim/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/git/moa/bin:$PATH
@@ -85,21 +83,6 @@ precmd () {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-function git-ls {
-    git log --oneline --stat --since=1.days $* \
-    | perl -ne 'if(/ +(\S+?)(\.\w+)? +\| +(\d+) (.+)/){ printf "%4s | %-50s %s\n", $3, $1 . $2, $4; }'
-}
-function git-wc {
-    git-ls $* \
-    | perl -ne '
-    if($.==1){ %c = (); };
-    if(/(\d+) +\| +\S+?(\.\w+)? /){ $c{$2}+=int($1) };
-    if(eof){ foreach(sort { $c{$a} <=> $c{$b} } keys %c) { printf "%6s | %s\n", $c{$_}, ($_ ? $_ : "(none)") } };
-    '
-}
-function git-branch {
-    git fetch; git branch -r | egrep -v "master|release" | xargs -i{} git --no-pager log -1 --date=iso --pretty=format:'%C(red)%ad%Creset {} \\t\\t\\t %C(green)%s%Creset\\n' --decorate {} | xargs echo -e | sort -r
 }
 # ---( console )-------------------------------------------------
 autoload colors
@@ -184,7 +167,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=1
 
 # ---( docker with lima )--------------------------------------
-alias docker-rm-all='docker rm $(docker ps -a -q)'
 export DOCKER_HOST=unix://$HOME/.lima/docker/sock/docker.sock
 
 # --( 環境依存 )-----------------------------------------------
@@ -200,22 +182,3 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/Users/hiroshi/.opam/opam-init/init.zsh' ]] || source '/Users/hiroshi/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/hiroshi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hiroshi/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/hiroshi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hiroshi/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/hiroshi/.lmstudio/bin"
-# End of LM Studio CLI section
