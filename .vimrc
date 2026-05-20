@@ -11,15 +11,13 @@ nnoremap sm :Marks <cr>
 nnoremap sr :source ~/.vimrc <cr>:e!<cr>
 nnoremap st :Tags <cr>
 nnoremap sh :Helptags <cr>
-"nnoremap sz :botright terminal ++rows=5 ++close <cr> make <cr>
-"nnoremap sgm :!tig main % <cr><cr>
-"nnoremap sgl :!tig log % <cr><cr>
-"nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
-"nnoremap sgr :!tig refs <cr><cr>
-"nnoremap sgs :!tig status <cr><cr>
+nnoremap sgm :!tig main % <cr><cr>
+nnoremap sgl :!tig log % <cr><cr>
+nnoremap sgb :silent! !tig blame -f +<C-r>=line('.')<cr> %<cr>:redraw!<cr>
+nnoremap sgr :!tig refs <cr><cr>
+nnoremap sgs :!tig status <cr><cr>
 nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
-nnoremap sd :terminal ++close ++rows=999 zsh -c "git diff --exit-code \|\| { printf \"commit message: \"; read msg; [[ -n $msg ]] && git add -A && git commit -F - <<<\"\$msg\" && git push }" <cr>
 
 " --( customize )-----------------------------------------
 au BufRead,BufNewFile *.moa set filetype=moa
@@ -279,6 +277,10 @@ Plug 'sheerun/vim-polyglot'
 
 " -- extend registers
 Plug 'junegunn/vim-peekaboo'
+
+" -- lisp
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 
 " -- plug end
 call plug#end()

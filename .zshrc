@@ -209,3 +209,13 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # This section can be safely removed at any time if needed.
 [[ ! -r '/Users/hiroshi/.opam/opam-init/init.zsh' ]] || source '/Users/hiroshi/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hiroshi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hiroshi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hiroshi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hiroshi/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/hiroshi/.lmstudio/bin"
+# End of LM Studio CLI section

@@ -40,7 +40,8 @@ clean:
 
 ubuntu-init:
 	sudo apt update && sudo apt upgrade -y
-	sudo apt purge -y nano firefox ubuntu-web-launchers "*libreoffice*" "printer-driver*" thunderbird "rhythmbox*"
+	sudo apt purge -y nano "*libreoffice*" "printer-driver*" thunderbird "rhythmbox*"
+	sudo snap remove firefox snap-store
 	sudo apt install -y vim-nox zsh git tig silversearcher-ag ncdu atop iotop mercurial tmux libssl-dev ghc golang-go compizconfig-settings-manager nodejs compiz-plugins rbenv docker.io
 	xset r rate 220 80 # override the new limited keyboard repeat rate limit, 220 is rate, 80 is delay
 
