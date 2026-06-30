@@ -6,13 +6,11 @@ alias m="make"
 alias pw="ruby -e 'puts Array.new((ARGV[0] || 16).to_i){ rand(63) }.pack(%q!C*!).tr(%Q!\x00-\x3f!, %q!A-Za-z0-9_!)'"
 
 # ---( alias )-------------------------------------------------
-#alias -g L="| less"
-#alias -g G="| grep"
 alias l="ls -vGlhF"
 alias ll="ls -vaGlhF"
 alias h="history -ir | uniq -f 4"
 alias ag="ag -W 90"
-alias au="sudo apt update && sudo apt upgrade"
+#alias au="sudo apt update && sudo apt upgrade"
 alias gp="git pull"
 alias gf="git fetch --prune"
 alias ga="git add"
@@ -22,9 +20,6 @@ alias gdc="git diff --cached"
 alias gdn="git diff --name-only"
 alias gs="git status --short --branch"
 alias gc="git checkout"
-alias gca="git commit -a"
-alias gr="git reset"
-#alias gsu="git submodule update -i"
 alias gl="git log --no-merges --pretty=format:'%h %ad %Cgreen(%an)%Creset %s' --date=short"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
 function ww {
@@ -51,10 +46,10 @@ export PATH=/opt/homebrew/opt/llvm/bin:$PATH
 export EDITOR=vi
 export SHELL=`which zsh`
 
-# for gpg+vim
+# gpg+vim
 export GPG_TTY=$(tty)
 
-# for pager
+# pager
 export LESSCHARSET=utf-8
 
 # python
@@ -65,15 +60,6 @@ export PYTHONDONTWRITEBYTECODE=1 # disable .pyc create
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
-
-# --( SSH )-----------------------------------------------
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-function ssh-add-permanent {
-  pkill ssh-agent
-  eval `ssh-agent`
-  ssh-add
-  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
-}
 
 # --( Git )-----------------------------------------------
 autoload -Uz vcs_info
@@ -175,10 +161,3 @@ export DOCKER_HOST=unix://$HOME/.lima/docker/sock/docker.sock
 export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-
-# bun completions
-[ -s "/Users/hiroshi/.bun/_bun" ] && source "/Users/hiroshi/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
