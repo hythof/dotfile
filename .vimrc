@@ -20,9 +20,9 @@ nnoremap sp :setlocal spell spelllang=en <cr>
 nnoremap sn :setlocal nospell <cr>
 
 " --( customize )-----------------------------------------
-au BufRead,BufNewFile *.moa set filetype=moa
 exe 'set runtimepath+=~/git/moa/misc/vim/'
 au! BufRead,BufNewFile *.moa setlocal filetype=moa fileencoding=utf-8 fileformat=unix
+
 
 " ---( generic )--------------------------------------
 "新しい行のインデントを現在行と同じにする
