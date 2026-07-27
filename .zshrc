@@ -22,6 +22,9 @@ alias gs="git status --short --branch"
 alias gc="git checkout"
 alias gl="git log --no-merges --pretty=format:'%h %ad %Cgreen(%an)%Creset %s' --date=short"
 alias gll='git log --no-merges --graph --decorate -p --date=iso --pretty=format:"%C(yellow)%h%Creset %ce %cd %s"'
+function gg {
+    git grep -n "$*"
+}
 function ww {
     (
         grep "$*" /usr/share/dict/words | wc -l
