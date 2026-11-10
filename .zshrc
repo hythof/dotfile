@@ -156,9 +156,56 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=1
 
 # ---( Claude Code )--------------------------------------
-ccusage () {
-	find ~/.claude/projects -name '*.jsonl' -type f -exec perl -MJSON::PP -MTime::Local=timegm,timelocal -ne 'BEGIN{@l=localtime;$from=timelocal(0,0,0,$l[3],$l[4],$l[5]);$to=$from+86400;%R=("claude-opus-5"=>[5,25,6.25,10,.5],"claude-opus-5-5"=>[4,20,5,8,.2],"claude-sonnet-5"=>[2,10,2.5,4,.2],"claude-fable-5-1"=>[10,50,12.5,20,.25],"anthropic.claude-haiku-4-5-20251001-v1:0"=>[1,5,1.25,2,.1])}eval{$j=decode_json($_);1}or next;$u=$j->{message}{usage}or next;$t=$j->{timestamp}//"";next unless $t=~/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)/;$e=timegm($6,$5,$4,$3,$2-1,$1);next unless $e>=$from&&$e<$to;$s=$j->{sessionId}//$j->{session_id}//next;$m=$j->{message}{model}//"";next if $m eq "<synthetic>";$br{$s}=$j->{gitBranch} if length($j->{gitBranch}//"");$r=$R{$m};if(!$r){$unknown{$m}=1;next}$cc=$u->{cache_creation}||{};$w5=$cc->{ephemeral_5m_input_tokens}//0;$w1=$cc->{ephemeral_1h_input_tokens}//0;if(!$w5&&!$w1){$w5=$u->{cache_creation_input_tokens}//0}$cost{$s}+=(($u->{input_tokens}//0)*$r->[0]+($u->{output_tokens}//0)*$r->[1]+$w5*$r->[2]+$w1*$r->[3]+($u->{cache_read_input_tokens}//0)*$r->[4])/1e6;END{printf "%-12s %s\n","COST","GIT_BRANCH";for $s(sort{$cost{$b}<=>$cost{$a}}keys%cost){printf "\$%-11.4f %s\n",$cost{$s},$br{$s}//"-"}print STDERR "UNKNOWN MODEL: $_\n" for keys%unknown}' {} +
+ccrm() {
+  rm -rf ~/.claude/projects/
+  mkdir ~/.claude/projects/
+  echo "" > ~/.claude/history.jsonl
 }
+ccusage() {
+  find ~/.claude/projects -name '*.jsonl' -type f -exec perl \
+    -MJSON::PP -MTime::Local=timegm,timelocal -ne '
+    BEGIN {
+      $start = timelocal(0, 0, 0, (localtime)[3..5]);
+      %rates = (
+        "claude-opus-4-8"  => [5, 25, 6.25, 10, .5],
+        "claude-opus-5"    => [5, 25, 6.25, 10, .5],
+        "claude-opus-5-5"  => [4, 20, 5, 8, .2],
+        "claude-sonnet-5"  => [2, 10, 2.5, 4, .2],
+        "claude-fable-5-1" => [10, 50, 12.5, 20, .25],
+        "anthropic.claude-haiku-4-5-20251001-v1:0" => [1, 5, 1.25, 2, .1],
+      );
+    }
+
+    my $j = eval { decode_json($_) } or next;
+    my $u = $j->{message}{usage} or next;
+    ($j->{timestamp} // "") =~ /^(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)/ or next;
+    my $t = timegm($6, $5, $4, $3, $2 - 1, $1);
+    next unless $t >= $start && $t < $start + 86400;
+
+    my $s = $j->{sessionId} // $j->{session_id} // next;
+    my $m = $j->{message}{model} // "";
+    next if $m eq "<synthetic>";
+    $branch{$s} = $j->{gitBranch} if $j->{gitBranch};
+    my $r = $rates{$m} or do { $unknown{$m} = 1; next };
+
+    my $c = $u->{cache_creation};
+    my @tok = (
+      $u->{input_tokens}, $u->{output_tokens},
+      $c->{ephemeral_5m_input_tokens}, $c->{ephemeral_1h_input_tokens},
+      $u->{cache_read_input_tokens},
+    );
+    $tok[2] ||= $u->{cache_creation_input_tokens} unless $tok[3];
+    $cost{$s} += ($tok[$_] // 0) * $r->[$_] / 1e6 for 0 .. 4;
+
+    END {
+      printf "%-12s %s\n", "COST", "GIT_BRANCH";
+      printf "\$%-11.4f %s\n", $cost{$_}, $branch{$_} // "-"
+        for sort { $cost{$b} <=> $cost{$a} } keys %cost;
+      warn "UNKNOWN MODEL: $_\n" for sort keys %unknown;
+    }
+  ' {} +
+}
+
 
 # ---( docker with lima )--------------------------------------
 export DOCKER_HOST=unix://$HOME/.lima/docker/sock/docker.sock
